@@ -1,0 +1,4 @@
+a^2 = 2 should be equal to 2
+b^5 = 2 should be equal to 2
+ln(c) = 3.14159 should be equal to pi
+log_PI(d) = 2.71828
