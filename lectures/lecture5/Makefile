@@ -12,7 +12,4 @@ MKLIB = mcs -target:library -out:$@ $(CSLIBS) $(DLLS) $(CODE)
 
 #In C++
 Out.txt : main.exe main
-	mono $< > $@
 	./$< >> $@
-
-main.exe : main.cs ; $(MKEXE)
