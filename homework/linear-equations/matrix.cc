@@ -1,3 +1,9 @@
+#include<cmath>
+#include<string>
+#include<iostream>
+#include"matrix.h"
+#define SELF (*this)
+
 class matrix{
     public readonly int size1, size2;
     private double[] data;
