@@ -57,8 +57,10 @@ int main(int argc, char** argv) {
     vector Ax = A * x;
     std::cout << "Ax ?= b : " << approx(Ax, b) << "\n";
 
-    // std::cout << "Inverse of A:\n";
-    // matrix AInv = qrsolver.inverse();
-    // (AInv * A).print("A^-1 * A = ");
-    // std::cout << "A^-1 * A ?= I : " << approx(AInv*A, I) << "\n"; 
-}
+    std::cout << "Inverse of A:\n";
+   
+    matrix AInv = qrsolver.inverse();
+    AInv.print("B = ");
+    (AInv * A).print("B * A = ");
+    std::cout << "B * A ?= I : " << approx(AInv*A, I) << "\n"; 
+}   

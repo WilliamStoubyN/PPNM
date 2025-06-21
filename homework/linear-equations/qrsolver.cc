@@ -35,6 +35,7 @@ double QRSolver::determinant() {
 }
 
 matrix& QRSolver::inverse() {
+    matrix RInv(R.nrows, R.ncols);
     double sum;
     for(int j = 0; j < R.ncols; ++j) {
         RInv(j,j) = 1/R(j,j);
