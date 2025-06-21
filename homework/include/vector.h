@@ -51,7 +51,7 @@ vector operator-(const vector&, double);
 vector operator-(double, const vector&);
 vector operator*(const vector&, double);
 vector operator*(double, const vector&);
-vector operator/(const vector&, double):
+vector operator/(const vector&, double);
 
 vector project(const vector&, const vector&);       //Project vector a onto vector b
 

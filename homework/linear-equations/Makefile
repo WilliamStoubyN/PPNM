@@ -11,41 +11,17 @@ INCS = $(INCLUDE_DIR)/vector.h $(INCLUDE_DIR)/matrix.h qrsolver.h
 SRCS = $(INCS:$(INCLUDE_DIR)/%.h=$(SOURCE_DIR)/%.cc)
 SRCS := $(SRCS:.h=.cc)
 
-OBJS := $(INCS:$(I_DIR)/%.h=$(OBJ_DIR)/%.o)
+OBJS := $(INCS:$(INCLUDE_DIR)/%.h=$(OBJECT_DIR)/%.o)
 OBJS := $(OBJS:.h=.o)
 
 .PHONY: all clean
-all: Out.txt plot.times.svg
+all: Out.txt
 
 Out.txt : main
 	./$< -n 4 -m 4 > $@
 
 main : main.o $(OBJS)
 	$(CXX) $(CXXFLAGS) $(LDLIBS) $(CPPFLAGS) -o $@ $^
-
-plot.times.svg : out.times.txt Makefile
-	echo 'set terminal svg background "white"; \
-		  set output "$@"; \
-		  set key left; \
-		  set xlabel "size of matrix n x n"; \
-		  set ylabel "algorithm runtime (s)"; \
-		  f(x) = a*x*x*x ; \
-		  a = 0.01; \
-		  fit f(x) "$<" via a; \
-		  plot \
-		  	"$<" index 0 with points title "Runtime of QR factorization",\
-		   f(x) title sprintf("a = %3.5f ns",a*1e9)\
-	' | gnuplot
-
-
-out.times.txt: factorizer
-	>$@
-	for n in $$(seq 100 100 2000); \
-		do $(TIME) ./factorizer -n $$n;\
-	done
-
-factorizer : factorizer.o $(OBJS)
-	$(CXX) $(CXXFLAGS) $(LDLIBS) -o $@ $^
 
 #Create all object files from their corresponding .cc file. Also check if the obj folder even exists
 $(OBJECT_DIR)/%.o : $(SOURCE_DIR)/%.cc | $(OBJECT_DIR)
@@ -59,4 +35,4 @@ matrix_test : matrix_test.o $(OBJS)
 vector_test : vector_test.o ../include/vector.h
 
 clean:
-	$(RM) [Oo]ut*.txt main vector_test matrix_test factorizer *.png *.svg *.log $(OBJS) *.o
+	$(RM) [Oo]ut*.txt main vector_test matrix_test $(OBJS) *.o

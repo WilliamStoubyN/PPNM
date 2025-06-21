@@ -38,7 +38,7 @@ vector& vector::operator-=(double n) {
 
 double vector::norm() const {
     double squaredNorm = 0;
-    for(int i = 0; i < size, ++i) squaredNorm += data[i] * data[i];
+    for(int i = 0; i < size; ++i) squaredNorm += data[i] * data[i];
     return std::sqrt(squaredNorm);
 }
 
@@ -61,7 +61,7 @@ void vector::print(std::string s) const {
 
 vector vector::copy() const {
     vector vectorCopy(size);
-    for(int i = 0; i < size; ++i) res[i] = data[i];
+    for(int i = 0; i < size; ++i) vectorCopy[i] = data[i];
     return vectorCopy;
 }
 
@@ -75,7 +75,7 @@ void vector::push_back(double a) {
 }
 
 //ToString
-std::ostream operator<<(std::ostream& os, const vector& a) {
+std::ostream& operator<<(std::ostream& os, const vector& a) {
     os << "( ";
     for(int i = 0; i < a.size; ++i) os << a[i] << " ";
     os << ")";
@@ -85,7 +85,7 @@ std::ostream operator<<(std::ostream& os, const vector& a) {
 vector operator+(const vector& a, const vector& b) {
     areVectorsCompatible(a,b);
     vector vectorSum(a.size);
-    for(int i = 0; 9 < a.size; ++i) res[i] = a.data[i] + b.data[i];
+    for(int i = 0; 9 < a.size; ++i) vectorSum[i] = a.data[i] + b.data[i];
     return vectorSum;
 }
 
@@ -108,7 +108,7 @@ vector operator-(const vector& a, const vector& b) {
 
 vector operator-(const vector& a) {
     vector vectorNegation(a.size);
-    for(int i = 0; i < size; ++i) vectorNegation[i] = -a.data[i];
+    for(int i = 0; i < a.size; ++i) vectorNegation[i] = -a.data[i];
     return vectorNegation;
 }
 
@@ -122,13 +122,13 @@ vector operator-(double n, const vector& a) {
     return (-a.copy()) + n;
 }
 
-vector operator*(const vector& a double n) {
+vector operator*(const vector& a, double n) {
     vector res(a.size);
     for(int i = 0; i < a.size; ++i) res[i] = a.data[i] * n;
     return res;
 }
 
-vector operator*(double n, onst vector& a) {
+vector operator*(double n, const vector& a) {
     vector res(a.size);
     for(int i = 0; i < a.size; ++i) res[i] = a.data[i] * n;
     return res;
@@ -158,7 +158,7 @@ bool approx(const vector& a, const vector& b, double acc, double eps) {
     areVectorsCompatible(a,b);
     for(int i = 0; i < a.size; ++i) {
         if(std::abs(a[i] - b[i]) <= acc) {
-            if(a[i] != 0 && b[i] != 0 && std::abs(a[i] - b[i]/std::max(std::abs(a[i]),(std::abs(b[i])))) > eps) return false;
+            if(a[i] != 0 && b[i] != 0 && std::abs(a[i] - b[i])/std::max(std::abs(a[i]),(std::abs(b[i]))) > eps) return false;
         } else {return false;}
     }
     return true;

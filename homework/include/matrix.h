@@ -1,4 +1,4 @@
-#infdef HAVE_MATRIX_H
+#ifndef HAVE_MATRIX_H
 #define HAVE_MATRIX_H
 
 #include"vector.h"
@@ -25,7 +25,7 @@ class matrix {
         void setRow(int, vector);
         void setRow(int, double);
 
-        vector getCol(inst) const;
+        vector getCol(int) const;
         void setCol(int, matrix);
         void setCol(int, vector);
         void setCol(int, double);
@@ -33,19 +33,19 @@ class matrix {
         inline double& operator()(int i, int j) {return cols[i + j * nrows];};
         inline double operator()(int i, int j) const {return cols[i + j * nrows];};
 
-        matrix& operator+=(double);
-        matrix& operator-=(double);
+        matrix& operator+=(const matrix&);
+        matrix& operator-=(const matrix&);
         matrix& operator*=(double);
         matrix& operator/=(double);
 
-        void print(std::string s = "") const;       //for debugging purposes
+        void print(std::string s = "", std::ostream& = std::cout) const;       //for debugging purposes
         matrix copy();
     };
 
 matrix transpose(const matrix& a);
 matrix reshape(const vector, int, int);
 matrix identity(int);       //create identity matrix of given size
-bool approx(const matrix& a, const matrix& b, double acc = 1e-6, double eps = 1-e6);
+bool approx(const matrix& a, const matrix& b, double acc = 1e-6, double eps = 1e-6);
 
 matrix operator+(const matrix& a, const matrix& b);
 matrix operator-(const matrix& a);

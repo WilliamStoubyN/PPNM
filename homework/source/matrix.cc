@@ -40,7 +40,7 @@ vector matrix::getRow(int i) const {
 
 void matrix::setRow(int i, matrix setRow) {
     if(i >= nrows) {throw std::invalid_argument("index out of range for matrix with " + std::to_string(nrows) + " rows.");}
-    if(setRow.size != ncols) {throw std::invalid_argument("operand shape does not match, setting row of length " + std::to_string(setRow.size) + " into matrix of " + std::to_string(ncols) + " columns.");}
+    if(setRow.ncols != ncols) {throw std::invalid_argument("operand shape does not match, setting row of length " + std::to_string(setRow.ncols) + " into matrix of " + std::to_string(ncols) + " columns.");}
     for(int j = 0; j < ncols; ++j) cols[i + j * nrows] = setRow(i,j);
 }
 
@@ -70,25 +70,25 @@ void matrix::setCol(int j, double n) {
     for(int i = 0; i < nrows; ++i) cols[i + j * nrows] = n;
 }
 
-void matrix::print(std::string s, std::ostream&) const {
-    std::cout << s << "(";
+void matrix::print(std::string s, std::ostream& out) const {
+    out << s << "(";
     int maxSize = 1;
     for(int i = 0; i < nrows; ++i) for(int j = 0; j < ncols; ++j) maxSize = std::max((int)(std::to_string(cols[i + j * nrows]).size()), maxSize);
     for(int i = 0; i < nrows; ++i) {
-        for(int j = 0; j < ncols, ++j) {
-            if(cols[i + j * nrows] >= 0) std::cout << " " << std::setw(maxSize + 3) << std::left;
-            else std::cout << std::setw(maxSize + 4) << std::left;
-            std::cout << cols[i + j * nrows] << " ";
+        for(int j = 0; j < ncols; ++j) {
+            if(cols[i + j * nrows] >= 0) out << " " << std::setw(maxSize + 3) << std::left;
+            else out << std::setw(maxSize + 4) << std::left;
+            out << cols[i + j * nrows] << " ";
         }
-        if(i == nrows - 1) std::cout << ")\n";
-        else std::cout << std::setw((int)s.size() + 2) << "\n";
+        if(i == nrows - 1) out << ")\n";
+        else out << std::setw((int)s.size() + 2) << "\n";
     }
 }
 
 matrix matrix::copy() {
     matrix matrixCopy(nrows, ncols);
     for(int i = 0; i < nrows; ++i) {
-        for(int j = 0; j < ncols; ++j) matrixCopy[i, j] = cols[i + j * nrows];
+        for(int j = 0; j < ncols; ++j) matrixCopy(i, j) = cols[i + j * nrows];
     }
     return matrixCopy;
 }
@@ -96,19 +96,23 @@ matrix matrix::copy() {
 matrix transpose(const matrix& a) {
     matrix aTransposed(a.ncols, a.nrows);
     for(int i = 0; i < aTransposed.nrows; ++i) {
-        for(int j = 0; j < aTransposed.ncols; ++J) aTransposed(i,j) = a (j,i);
+        for(int j = 0; j < aTransposed.ncols; ++j) aTransposed(i,j) = a(j,i);
     }
     return aTransposed;
 }
 
 matrix reshape(const vector a, int nrows, int ncols) {
     if(a.size != nrows * ncols) {throw std::invalid_argument("vector of length " + std::to_string(a.size) + " could not be reshaped to matrix of size (" + std::to_string(nrows) + ", " + std::to_string(ncols) + ")\n");}
-    matrix
+    matrix res(nrows,ncols);
+    for(int i = 0; i < res.nrows; ++i) {
+        for(int j = 0; j < res.ncols; ++j) res(i,j) = a[ncols * i + j];
+    }
+    return res;
 }
 
 matrix identity(int n) {
     matrix res(n,n);
-    for(int i = 0; i < nrows; ++i) res(i,i) = 1;
+    for(int i = 0; i < n; ++i) res(i,i) = 1;
     return res;
 }
 
@@ -149,16 +153,17 @@ matrix operator*(const matrix& a, double n) {
     return matrixAndScalarProduct;
 }
 
-matrix operator*(double n, const matrix& a) {return a * n};
+matrix operator*(double n, const matrix& a) {return a * n;}
 
 matrix operator*(const matrix& a, const matrix& b) {
     isMatrixProductPossible(a,b);
-    matrix c = (a.nrows, a.ncols);
+    matrix c(a.nrows, b.ncols);
     double sum;
     for(int i = 0; i < c.nrows; ++i) {
         for(int j = 0; j < c.ncols; ++j) {
             sum = 0;
             for(int f = 0; f < a.ncols; ++f) sum += a(i,f) * b(f,j);
+            c(i,j) = sum;
         }
     }
     return c;
@@ -177,11 +182,12 @@ vector operator*(const matrix& a, const vector& b) {
     if(a.ncols != b.size) {throw std::invalid_argument("operand shapes do not match (" + std::to_string(a.nrows) + "," + std::to_string(a.ncols) + ") * " + std::to_string(b.size));}
     vector res(a.nrows);
     for(int i = 0; i < a.nrows; ++i) res[i] = dot(a.getRow(i), b);
+    return res;
 }
 
 //Matrix multiplication with a column vector
 vector operator*(const vector& a, const matrix& b) {
-    if(a.size != b.ncols) {throw std::invalid_argument("operand shapes do not match (" + std::to_string(a.size) + " * (" std::to_string(b.nrows) + "," + std::to_string(b.ncols) + ")");}
+    if(a.size != b.ncols) {throw std::invalid_argument("operand shapes do not match (" + std::to_string(a.size) + " * (" + std::to_string(b.nrows) + "," + std::to_string(b.ncols) + ")");}
     vector res(b.ncols);
     for(int j = 0; j < b.ncols; ++j) res[j] = dot(a, b.getCol(j));
     return res;
@@ -196,7 +202,7 @@ void isMatrixSumPossible(const matrix& a, const matrix& b) {
 }
 
 void isMatrixProductPossible(const matrix& a, const matrix& b) {
-    if(a.ncols != b.rows) {
+    if(a.ncols != b.nrows) {
         throw std::invalid_argument("operand shapes do not match ("
                                     + std::to_string(a.nrows) + "," + std::to_string(a.ncols) + ") , ("
                                     + std::to_string(b.nrows) + "," + std::to_string(b.ncols) + ")");
