@@ -42,6 +42,11 @@ class matrix {
         matrix copy();
     };
 
+matrix transpose(const matrix& a);
+matrix reshape(const vector, int, int);
+matrix identity(int);       //create identity matrix of given size
+bool approx(const matrix& a, const matrix& b, double acc = 1e-6, double eps = 1-e6);
+
 matrix operator+(const matrix& a, const matrix& b);
 matrix operator-(const matrix& a);
 matrix operator-(const matrix& a, const matrix& b);
@@ -51,9 +56,8 @@ matrix operator*(double, const matrix& a);
 matrix operator*(const matrix& a, const matrix& b);
 vector operator*(const matrix& a, const vector& b);         //vector class has no shape, so it requires one to be aware whether it is a row or column vector
 vector operator*(const vector& a, const matrix& b);
-matrix transpose(const matrix& a);
 
-matrix identity(int);       //create identity matrix of given size
-bool approx(const matrix& a, const matrix& b, double acc = 1e-6, double eps = 1-e6);
 void isMatrixProductPossible(const matrix& a, const matrix& b);        //Check if the matrices are compatible for matrix multiplication
 void isMatrixSumPossible(const matrix& a, const matrix& b);            //Check if the matrices are compatible for addition and subtraction
+
+#endif

@@ -93,10 +93,6 @@ matrix matrix::copy() {
     return matrixCopy;
 }
 
-matrix operator+(const matrix& a, const matrix& b) {
-    isMatrixSumPossible(a,b);
-}
-
 matrix transpose(const matrix& a) {
     matrix aTransposed(a.ncols, a.nrows);
     for(int i = 0; i < aTransposed.nrows; ++i) {
@@ -105,19 +101,91 @@ matrix transpose(const matrix& a) {
     return aTransposed;
 }
 
+matrix reshape(const vector a, int nrows, int ncols) {
+    if(a.size != nrows * ncols) {throw std::invalid_argument("vector of length " + std::to_string(a.size) + " could not be reshaped to matrix of size (" + std::to_string(nrows) + ", " + std::to_string(ncols) + ")\n");}
+    matrix
+}
 
+matrix identity(int n) {
+    matrix res(n,n);
+    for(int i = 0; i < nrows; ++i) res(i,i) = 1;
+    return res;
+}
 
+bool approx(const matrix& a, const matrix& b, double acc, double eps) {
+    isMatrixSumPossible(a,b);
+    for(int i = 0; i < a.nrows; ++i) {
+        for(int j = 0; j < a.ncols; ++j) {
+            if(std::abs(a(i,j) - b(i,j)) <= acc) {
+                if(a(i,j) > acc && b(i,j) > acc && std::abs(a(i,j) - b(i,j))/std::max(std::abs(a(i,j)), (std::abs(b(i,j)))) > eps) return false;
+            } else {return false;}
+        }
+    } return true;
+}
 
+matrix operator+(const matrix& a, const matrix& b) {
+    isMatrixSumPossible(a,b);
+    matrix matrixSum(a.nrows, a.ncols);
+    for(int i = 0; i < a.nrows; ++i) {
+        for(int j = 0; j < a.ncols; ++j) matrixSum(i,j) = a(i,j) + b(i,j);
+    }
+    return matrixSum;
+}
 
+matrix operator-(const matrix& a, const matrix& b) {
+    isMatrixSumPossible(a,b);
+    matrix matrixSum(a.nrows, a.ncols);
+    for(int i = 0; i < a.nrows; ++i) {
+        for(int j = 0; j < a.ncols; ++j) matrixSum(i,j) = a(i,j) - b(i,j);
+    }
+    return matrixSum;
+}
 
+matrix operator*(const matrix& a, double n) {
+    matrix matrixAndScalarProduct(a.nrows, a.ncols);
+    for(int i = 0; i < a.nrows; ++i) {
+        for(int j = 0; j < a.ncols; ++j) matrixAndScalarProduct(i,j) = a(i,j) * n;
+    }
+    return matrixAndScalarProduct;
+}
 
+matrix operator*(double n, const matrix& a) {return a * n};
 
+matrix operator*(const matrix& a, const matrix& b) {
+    isMatrixProductPossible(a,b);
+    matrix c = (a.nrows, a.ncols);
+    double sum;
+    for(int i = 0; i < c.nrows; ++i) {
+        for(int j = 0; j < c.ncols; ++j) {
+            sum = 0;
+            for(int f = 0; f < a.ncols; ++f) sum += a(i,f) * b(f,j);
+        }
+    }
+    return c;
+}
 
+matrix operator/(const matrix& a, double n) {
+    matrix res(a.nrows, a.ncols);
+    for(int i = 0; i < a.nrows; ++i) {
+        for(int j = 0; j < a.ncols; ++j) res(i,j) = a(i,j)/n;
+    }
+    return res;
+}
 
+//Matrix multiplication with a row vector
+vector operator*(const matrix& a, const vector& b) {
+    if(a.ncols != b.size) {throw std::invalid_argument("operand shapes do not match (" + std::to_string(a.nrows) + "," + std::to_string(a.ncols) + ") * " + std::to_string(b.size));}
+    vector res(a.nrows);
+    for(int i = 0; i < a.nrows; ++i) res[i] = dot(a.getRow(i), b);
+}
 
-
-
-
+//Matrix multiplication with a column vector
+vector operator*(const vector& a, const matrix& b) {
+    if(a.size != b.ncols) {throw std::invalid_argument("operand shapes do not match (" + std::to_string(a.size) + " * (" std::to_string(b.nrows) + "," + std::to_string(b.ncols) + ")");}
+    vector res(b.ncols);
+    for(int j = 0; j < b.ncols; ++j) res[j] = dot(a, b.getCol(j));
+    return res;
+}
 
 void isMatrixSumPossible(const matrix& a, const matrix& b) {
     if(a.ncols != b.ncols && a.nrows != b.nrows) {
