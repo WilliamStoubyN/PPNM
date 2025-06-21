@@ -82,7 +82,7 @@ void vec::print(std::string s) const {
 }
 
 std::ostream& operator<<(std::ostream& os, const vec& a) { // ToString method
-    os << "()" << a.x << ", " << a.y << ", " << a.z << ")" << "\n";
+    os << "(" << a.x << ", " << a.y << ", " << a.z << ")" << "\n";
     return os;
 }
 
