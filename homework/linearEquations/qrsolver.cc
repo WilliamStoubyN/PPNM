@@ -29,9 +29,9 @@ vector QRSolver::solve(const vector& b) const {
 }
 
 double QRSolver::determinant() {
-    double res = 1;
-    for(int i = 0; i < R.ncols; ++i) res *= R(i,i);
-    return res;
+    double determinant = 1;
+    for(int i = 0; i < R.ncols; ++i) determinant *= R(i,i);
+    return determinant;
 }
 
 matrix& QRSolver::inverse() {
