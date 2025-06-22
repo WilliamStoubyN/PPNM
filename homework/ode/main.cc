@@ -23,7 +23,7 @@ int main() {
     //Debugging with harmonic example
     //y'' = -y
     y0[0] = 0.0; y0[1] = 1.0;
-    a = 0.0, b = 5.0;
+    a = 0.0, b = 30.0;
     acc = 0.001, eps = 0.001;
     std::tuple<vector, std::vector<vector>> harmonicStepper = rkDriver(harmonic, a, b, y0, 0.125, acc, eps);
 

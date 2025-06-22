@@ -1,11 +1,18 @@
 #include"ode.h"
 
 std::tuple<vector, vector> rkStep12(std::function<vector(double, vector)> f, double x, vector y, double h) {
+    // vector k0 = f(x,y);
+    // vector k1 = f(x + h/2, y + k0 * (h/2));
+    // vector yh = y + k1 * h;
+    // vector δy = (k1 - k0) * h;
+    // return std::tuple(yh, δy);
+
     vector k0 = f(x,y);
-    vector k1 = f(x + h/2, y + k0 * (h/2));
-    vector yh = y + k1 * h;
-    vector δy = (k1 - k0) * h;
-    return std::tuple(yh, δy);
+    vector k1 = f(x+h, y+k0*h);
+
+    vector dy1 = h * k0;
+    vector dy2 = 0.5 * h * (k0+k1);
+    return std::tuple(dy1, dy2);
 }
 
 std::tuple<vector, std::vector<vector>> rkDriver(std::function<vector(double, vector)> f, double a, double b, vector yInit, double h0, double acc, double eps) {
@@ -15,7 +22,7 @@ std::tuple<vector, std::vector<vector>> rkDriver(std::function<vector(double, ve
 
     vector xList;
     std::vector<vector> yList;
-    xList.push_back(x);
+    xList.push_back(a);
     yList.push_back(y);
 
     std::tuple<vector, vector> stepperTupple;
