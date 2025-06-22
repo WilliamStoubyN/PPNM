@@ -6,7 +6,7 @@ SOURCE_DIR := ../source
 OBJECT_DIR := ../object
 INCLUDE_DIR := ../include
 
-INCS = $(INCLUDE_DIR)/vector.h $(INCLUDE_DIR)/matrix.h ode.h
+INCS = $(INCLUDE_DIR)/vector.h $(INCLUDE_DIR)/matrix.h quad.h
 
 SRCS = $(INCS:$(INCLUDE_DIR)/%.h=$(SOURCE_DIR)/%.cc)
 SRCS := $(SRCS:.h=.cc)
@@ -15,37 +15,13 @@ OBJS := $(INCS:$(INCLUDE_DIR)/%.h=$(OBJECT_DIR)/%.o)
 OBJS := $(OBJS:.h=.o)
 
 .PHONY: all clean
-all: Out.txt plot.harmonic.svg plot.odeint.svg
+all: Out.txt
 
 Out.txt : main
 	./$< > $@
 
 main : main.o $(OBJS)
 	$(CXX) $(CXXFLAGS) $(LDLIBS) $(CPPFLAGS) -o $@ $^
-
-plot.harmonic.svg : Out.txt Makefile
-	echo 'set terminal svg background "white"; \
-		  set output "$@"; \
-		  set key bottom; \
-		  set xlabel "x"; \
-		  set ylabel "y"; \
-		  f(x) = cos(x) ; \
-		  plot \
-			f(x) title "cos(x)",\
-		  	"$<" index 0 with linespoints title "numerical solution y"\
-	' | gnuplot
-
-plot.odeint.svg : Out.txt Makefile
-	echo 'set terminal svg background "white"; \
-		  set output "$@"; \
-		  set key bottom; \
-		  set xlabel "t"; \
-		  set ylabel "theta"; \
-		  set title "Driven harmonic oscillator with friction from scipy"; \
-		  plot \
-		  	"$<" index 1 with linespoints title "numerical solution theta",\
-			"$<" index 2 with linespoints title "numerical solution omega"\
-	' | gnuplot
 
 #Create all object files from their corresponding .cc file. Also check if the object folder even exists
 $(OBJECT_DIR)/%.o : $(SOURCE_DIR)/%.cc | $(OBJECT_DIR)

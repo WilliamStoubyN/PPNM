@@ -1,18 +1,11 @@
 #include"ode.h"
 
 std::tuple<vector, vector> rkStep12(std::function<vector(double, vector)> f, double x, vector y, double h) {
-    // vector k0 = f(x,y);
-    // vector k1 = f(x + h/2, y + k0 * (h/2));
-    // vector yh = y + k1 * h;
-    // vector δy = (k1 - k0) * h;
-    // return std::tuple(yh, δy);
-
     vector k0 = f(x,y);
-    vector k1 = f(x+h, y+k0*h);
-
-    vector dy1 = h * k0;
-    vector dy2 = 0.5 * h * (k0+k1);
-    return std::tuple(dy1, dy2);
+    vector k1 = f(x + h/2, y + k0 * (h/2));
+    vector yh = y + k1 * h;
+    vector δy = (k1 - k0) * h;
+    return std::tuple(yh, δy);
 }
 
 std::tuple<vector, std::vector<vector>> rkDriver(std::function<vector(double, vector)> f, double a, double b, vector yInit, double h0, double acc, double eps) {
@@ -36,13 +29,16 @@ std::tuple<vector, std::vector<vector>> rkDriver(std::function<vector(double, ve
         vector δy = std::get<1>(stepperTupple);
         double tol = (acc + eps * yh.norm()) * std::sqrt(h/(b-a));
         double error = δy.norm();
+
         if(error <= tol) {
             x += h;
             y = yh;
             xList.push_back(x);
             yList.push_back(y);
         }
-        if(error > 0) {h *= std::min(std::pow(tol/error, 0.25) * 0.95, 2.0);} //readjust the step-size
+        if(error > 0) {
+            h *= std::min(std::pow(tol/error, 0.25) * 0.95, 2.0);
+        } //readjust the step-size
         else {h *= 2;}
     }
 }

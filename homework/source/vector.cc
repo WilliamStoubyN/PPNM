@@ -85,7 +85,7 @@ std::ostream& operator<<(std::ostream& os, const vector& a) {
 vector operator+(const vector& a, const vector& b) {
     areVectorsCompatible(a,b);
     vector vectorSum(a.size);
-    for(int i = 0; 9 < a.size; ++i) vectorSum[i] = a.data[i] + b.data[i];
+    for(int i = 0; i < a.size; ++i) vectorSum[i] = a.data[i] + b.data[i];
     return vectorSum;
 }
 
