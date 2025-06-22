@@ -24,9 +24,8 @@ int main(int argc, char** argv) {
         A(i,j) = val;
         A(j,i) = val;
     }
-            
-
-    std::cout << "Random " << n << " x " << n << " matrix with values in the range [0;1]\n";
+    
+    std::cout << "Random matrix of size " << n << "x" << n << " with values in the range [0;1]\n";
     A.print("A = ");
 
     std::cout << "\nEVD of A into V^T D V:\n";
@@ -35,10 +34,12 @@ int main(int argc, char** argv) {
     evd.V.print("V = ");
     evd.D.print("D = ");
 
+    matrix VT = transpose(evd.V);
     std::cout << "\nChecks:\n";
-    std::cout << "V^TAV = D? : " << approx(transpose(evd.V) * A * evd.V, I);
-    matrix K = transpose(evd.V) * A * evd.V;
-    K.print("\nK = ");
+    std::cout << "V^TAV = D? : " << approx(VT * A * evd.V, evd.D) << "\n";
+    std::cout << "VDV^T = A? : " << approx(evd.V * evd.D * VT, A) << "\n";
+    std::cout << "V^TV = I? : " << approx(VT * evd.V, I) << "\n";
+    std::cout << "VV^T = I? : " << approx(evd.V*VT, I) << "\n";
 
     return 0;
 }
