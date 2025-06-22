@@ -29,7 +29,7 @@ int main() {
     auto fit = lsfit(f, t, lny, lndy);
     vector parameters = fit;
 
-    std::cout << "Rutherford and Soddy results : \n";
+    std::cout << "#Rutherford and Soddy results : \n";
     for(int i = 0; i < (int)t.size; ++i) std::cout << t[i] << " " << y[i] << " " << dy[i] << "\n";
     std::cout << "\n";
 

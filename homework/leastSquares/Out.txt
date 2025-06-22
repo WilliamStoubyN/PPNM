@@ -1,4 +1,4 @@
-Rutherford and Soddy results : 
+#Rutherford and Soddy results : 
 1 117 6
 2 100 5
 3 88 4

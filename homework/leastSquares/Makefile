@@ -31,10 +31,10 @@ plot.fit.svg : Out.txt Makefile
 			set ylabel "Activity (counts)"; \
 			l = 0.170624; \
 			a = 4.95866; \
-			f(x) = exp(-1 * x + a); \
+			f(x) = exp(-l * x + a); \
 			plot \
 				"$<" index 0 with yerrorbars title "datapoints",\
-				f(x) title sprintf("F_c = exp(-%3.4f * x + %3.4f),l,a")\
+				f(x) title sprintf("F_c = exp(-0.170624 * x + 4.95866)")\
 		' | gnuplot
 
 #Create all object files from their corresponding .cc file. Also check if the object folder even exists
