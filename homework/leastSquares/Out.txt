@@ -1,4 +1,4 @@
-#Rutherford and Soddy results : 
+#Rutherford and Soddy results: 
 1 117 6
 2 100 5
 3 88 4
@@ -9,7 +9,7 @@
 13 15.2 2
 15 11.1 2
 
-Optimal parameters (a, lambda):
+Optimal parameters (a, λ):
 parameters = ( 4.95866 0.170624 )
 covariance matrix = ( 0.0012533    0.000197055 
                       0.000197055  5.12172e-05 )

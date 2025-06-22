@@ -30,11 +30,11 @@ int main() {
     vector parameters = std::get<0>(fit);
     matrix covarianceMatrix = std::get<1>(fit);
 
-    std::cout << "#Rutherford and Soddy results : \n";
+    std::cout << "#Rutherford and Soddy results: \n";
     for(int i = 0; i < (int)t.size; ++i) std::cout << t[i] << " " << y[i] << " " << dy[i] << "\n";
     std::cout << "\n";
 
-    std::cout << "Optimal parameters (a, lambda):\n";
+    std::cout << "Optimal parameters (a, λ):\n";
     parameters.print("parameters = ");
     covarianceMatrix.print("covariance matrix = ");
     std::cout << "parameter errors : " << std::sqrt(covarianceMatrix(0,0)) << ", " << std::sqrt(covarianceMatrix(1,1)) << "\n\n";
