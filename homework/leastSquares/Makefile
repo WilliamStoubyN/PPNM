@@ -1,4 +1,4 @@
-CXXFLAGS += -Wall -Wextra -Werror -std=c++23 -O2 -Wno-maybe-uninitialized
+CXXFLAGS += -Wall -Wextra -Werror -Wno-unused-parameter -std=c++23 -O2
 LDLIBS += -lstdc++ -lm
 TIME = time --portability --append --output=$@ --format "$$n %e"
 
@@ -15,13 +15,27 @@ OBJS := $(INCS:$(INCLUDE_DIR)/%.h=$(OBJECT_DIR)/%.o)
 OBJS := $(OBJS:.h=.o)
 
 .PHONY: all clean
-all: Out.txt
+all: Out.txt plot.fit.svg
 
 Out.txt : main
 	./$< > $@
 
 main : main.o $(OBJS)
 	$(CXX) $(CXXFLAGS) $(LDLIBS) $(CPPFLAGS) -o $@ $^
+
+plot.fit.svg : Out.txt Makefile
+	echo 'set terminal svg background "white"; \
+			set output "$@"; \
+			set key right; \
+			set xlabel "Time (day)"; \
+			set ylabel "Activity (counts)"; \
+			l = 0.170624; \
+			a = 4.95866; \
+			f(x) = exp(-1 * x + a); \
+			plot \
+				"$<" index 0 with yerrorbars title "datapoints",\
+				f(x) title sprintf("F_c = exp(-%3.4f * x + %3.4f),l,a")\
+		' | gnuplot
 
 #Create all object files from their corresponding .cc file. Also check if the object folder even exists
 $(OBJECT_DIR)/%.o : $(SOURCE_DIR)/%.cc | $(OBJECT_DIR)
@@ -32,4 +46,4 @@ $(OBJECT_DIR):
 	mkdir -p $@
 
 clean:
-	$(RM) [Oo]ut*.txt main vector_test matrix_test $(OBJS) *.o
+	$(RM) [Oo]ut*.txt main *.png *.svg *.log $(OBJS) *.o

@@ -63,4 +63,6 @@ int main(int argc, char** argv) {
     AInv.print("B = ");
     (AInv * A).print("B * A = ");
     std::cout << "B * A ?= I : " << approx(AInv*A, I) << "\n"; 
+
+    return 0;
 }   

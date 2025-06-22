@@ -8,8 +8,8 @@
 #include<functional>
 #include<tuple>
 
-std::vector lsfit(const std::vector<std::function<double(double)>>& f, const std::vector<double>&, const std::vector<double>&, const std::vector<double>)&;
-// std::tuple<vector, matrix> lsfit(const std::vector<std::function<double(double)>>& f, const std::vector<double>&, const std::vector<double>&, const std::vector<double>)&;
+vector lsfit(const std::vector<std::function<double(double)>>& f, const vector&, const vector&, const vector&);
+// std::tuple<vector, matrix> lsfit(const std::vector<std::function<double(double)>>& f, const std::vector<double>&, const std::vector<double>&, const std::vector<double>&);
 
 
 #endif

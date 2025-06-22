@@ -1,0 +1,16 @@
+Rutherford and Soddy results : 
+1 117 6
+2 100 5
+3 88 4
+4 72 4
+6 53 4
+9 29.5 3
+10 25.2 3
+13 15.2 2
+15 11.1 2
+
+Optimal parameters (a, lambda):
+parameters = ( 4.95866 0.170624 )
+ThX has measured half-life : 4.06242 days
+224Ra has half-life : 3.619 days
+The percentage deviation is : 12.2527%
