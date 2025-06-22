@@ -1,0 +1,16 @@
+acc = 0.0001, eps = 0.0001
+Integral of func1 : 0.666681 expected to be : 0.666667
+|implementation - analytic| <= acc =? 1
+|(implementation - analytic)/max(implementation, analytic)| <= eps =? 1
+
+Integral of func2 : 2 expected to be : 2
+|implementation - analytic| <= acc =? 1
+|(implementation - analytic)/max(implementation, analytic)| <= eps =? 1
+
+Integral of func3 : 0.785406 expected to be : 0.785398
+|implementation - analytic| <= acc =? 1
+|(implementation - analytic)/max(implementation, analytic)| <= eps =? 1
+
+Integral of func4 : -4 expected to be : -4
+|implementation - analytic| <= acc =? 1
+|(implementation - analytic)/max(implementation, analytic)| <= eps =? 1
