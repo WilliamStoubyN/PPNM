@@ -19,14 +19,11 @@ std::function<double(double)> erfh2(double z) {
     return f;
 };
 
-// double erf(double z, double acc, double eps) {
-
-//     if(z < 0 ) {return -erf(z);}
-//     if(0 <= z && z <= 1) {return 2/std::sqrt(M_PI) * integrate(erfh1, 0, z, acc, eps);}
-//     if(z > 1) {
-//         return 1 - 2/std::sqrt(M_PI * integrate(erfh2(z), 0, 1, acc, eps));
-//     }
-// };
+double erf(double z, double acc, double eps) {
+    if(z < 0 ) {return -erf(z);}
+    if(0 <= z && z <= 1) {return 2/std::sqrt(M_PI) * integrate(erfh1, 0, z, acc, eps);}
+    return 1 - 2/std::sqrt(M_PI * integrate(erfh2(z), 0, 1, acc, eps));
+};
 
 int main() {
     double res;
@@ -70,6 +67,9 @@ int main() {
     std::cout << "Integral of func4 : " << res << " expected to be : " << analytic << "\n"; 
     std::cout << "|implementation - analytic| <= acc =? " << (std::abs(res - analytic) <= acc) << "\n";
     std::cout << "|(implementation - analytic)/max(implementation, analytic)| <= eps =? " << (std::abs(res - analytic)/(std::max(std::abs(res), std::abs(analytic))) <= eps) << "\n";
+
+    //erf
+    double erf1 =  0.84270079294971486934;
 
     return 0;
 }
