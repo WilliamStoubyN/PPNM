@@ -6,6 +6,14 @@
 #include<string>
 #include<functional>
 
+std::function<vector(double, vector)> harmonic = [](double x, const vector& y) {
+    //y'' = -y
+    vector deriv(2);
+    deriv[0] = y[1];
+    deriv[1] = -y[0];
+    return deriv;
+};
+
 int main() {
     vector y0(2);
     double a, b;
@@ -28,10 +36,3 @@ int main() {
     return 0;
 }
 
-std::function<vector(double, vector)> harmonic = [](double x, const vector& y) {
-    //y'' = -y
-    vector deriv(2);
-    deriv[0] = y[1];
-    deriv[1] = -y[0];
-    return deriv;
-};
