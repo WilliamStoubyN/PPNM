@@ -3,7 +3,7 @@
 
 #include"../include/vector.h"
 #include"../include/matrix.h"
-#include"../linear-equations/qrsolver.h"
+#include"../linearEquations/qrsolver.h"
 #include<vector>
 #include<functional>
 #include<tuple>
