@@ -10,14 +10,14 @@
 #include<string>
 
 std::tuple<vector, vector> rkStep12(
-    std::function<vector(double, vector)> F,
-    double h, 
+    std::function<vector(double, vector)> f, 
     double x, 
-    vector y
+    vector y,
+    double h
 );
 
 std::tuple<vector, std::vector<vector>> rkDriver(
-    std::function<vector(double, vector)> F, 
+    std::function<vector(double, vector)> f, 
     double a, 
     double b, 
     vector yInit, 

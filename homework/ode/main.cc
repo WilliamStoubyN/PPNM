@@ -19,17 +19,17 @@ int main() {
     double a, b;
     double acc, eps;
     vector xList;
-    std::vector<vector> yList;
 
     //Debugging with harmonic example
     //y'' = -y
     y0[0] = 0.0; y0[1] = 1.0;
-    a = 0.0, b = 15;
+    a = 0.0, b = 5.0;
     acc = 0.001, eps = 0.001;
-    auto harmonicStepper = rkDriver(harmonic, a, b, y0, 0.125, acc, eps);
+    std::tuple<vector, std::vector<vector>> harmonicStepper = rkDriver(harmonic, a, b, y0, 0.125, acc, eps);
 
     vector xListHarmonic = std::get<0>(harmonicStepper);
     std::vector<vector> yListHarmonic = std::get<1>(harmonicStepper);
+    
     std::cout << "\n\n";
     for(int i = 0; i < xListHarmonic.size; ++i) std::cout << xListHarmonic[i] << ", " << yListHarmonic[i][0] << "\n";
 
