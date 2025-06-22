@@ -20,14 +20,15 @@ int main() {
         [](double t) {return -t;}
     };
     
-    //δln(y) = dy/y follows from error propagation, δln(y) = (dln(y)/dy) * dy = dy/y
+    //δln(y) = dy/y follows from the Law of Accumulation, δln(y) = (dln(y)/dy) * dy = dy/y
     for(int i = 0; i < (int)y.size; ++i) {
         lny[i] = std::log(y[i]);
         lndy[i] = dy[i]/y[i];
     }
 
     auto fit = lsfit(f, t, lny, lndy);
-    vector parameters = fit;
+    vector parameters = std::get<0>(fit);
+    matrix covarianceMatrix = std::get<1>(fit);
 
     std::cout << "#Rutherford and Soddy results : \n";
     for(int i = 0; i < (int)t.size; ++i) std::cout << t[i] << " " << y[i] << " " << dy[i] << "\n";
@@ -35,10 +36,17 @@ int main() {
 
     std::cout << "Optimal parameters (a, lambda):\n";
     parameters.print("parameters = ");
+    covarianceMatrix.print("covariance matrix = ");
+    std::cout << "parameter errors : " << std::sqrt(covarianceMatrix(0,0)) << ", " << std::sqrt(covarianceMatrix(1,1)) << "\n\n";
     double halfLife = std::log(2)/parameters[1];
-    std::cout << "ThX has measured half-life : " << halfLife << " days\n";
-    std::cout << "224Ra has half-life : 3.619 days" << "\n";
-    std::cout << "The percentage deviation is : " << (halfLife - 3.619)/3.619 * 100 << "%\n";
+
+    //From the Law of Accumulation we have
+    double halfLifeError = std::log(2)/parameters[1]/parameters[1] * std::sqrt(covarianceMatrix(1,1));
+
+    std::cout << "ThX has measured half-life : " << halfLife << " +/- " << halfLifeError << " days\n";
+    std::cout << "224Ra has half-life : 3.6319 days" << "\n";
+    std::cout << "The percentage deviation is : " << (halfLife - 3.6319)/3.6319 * 100 << "%\n";
+    std::cout << "Experimental data is " << (halfLife - 3.6319)/halfLifeError << " standard deviations away from the modern measurement\n";
 
     return 0;
 }

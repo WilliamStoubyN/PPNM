@@ -11,6 +11,11 @@
 
 Optimal parameters (a, lambda):
 parameters = ( 4.95866 0.170624 )
-ThX has measured half-life : 4.06242 days
-224Ra has half-life : 3.619 days
-The percentage deviation is : 12.2527%
+covariance matrix = ( 0.0012533    0.000197055 
+                      0.000197055  5.12172e-05 )
+parameter errors : 0.0354019, 0.00715662
+
+ThX has measured half-life : 4.06242 +/- 0.170394 days
+224Ra has half-life : 3.6319 days
+The percentage deviation is : 11.854%
+Experimental data is 2.52664 standard deviations away from the modern measurement
