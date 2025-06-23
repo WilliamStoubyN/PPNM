@@ -6,7 +6,7 @@ SOURCE_DIR := ../source
 OBJECT_DIR := ../object
 INCLUDE_DIR := ../include
 
-INCS = $(INCLUDE_DIR)/vector.h $(INCLUDE_DIR)/matrix.h minimizer.h
+INCS = $(INCLUDE_DIR)/vector.h $(INCLUDE_DIR)/matrix.h minimizer.h ../linearEquations/qrsolver.h
 
 SRCS = $(INCS:$(INCLUDE_DIR)/%.h=$(SOURCE_DIR)/%.cc)
 SRCS := $(SRCS:.h=.cc)
