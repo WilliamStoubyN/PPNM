@@ -2,7 +2,7 @@
 #include<random>
 
 
-vector plainmc(std::function<double(vector)> f, vector a, vector b, int N) {
+vector plainmc(std::function<double(vector)>& f, vector a, vector b, int N) {
     int dim = a.size;
     double V = 1;
 
