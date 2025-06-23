@@ -1,6 +1,5 @@
 #include"spline.h"
 
-//FAKE-IT
 double linterp(vector x, vector y, double z) {
     int i = binsearch(x,z);
     double dx = x[i + 1] - x[i]; if(!(dx > 0)) throw std::invalid_argument("Wrong direction");
