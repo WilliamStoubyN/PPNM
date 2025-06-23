@@ -4,16 +4,19 @@ std::tuple<vector, int> newton(std::function<double(vector)>& phi, vector x, dou
     int iterations = 0;
     vector xCopy = x.copy();
 
-    while (iterations < 1000) {
+    // std::cout << "x = " << x << "\n";
+
+
+    while (iterations < 10000) {
         vector gphi = gradient(phi,xCopy);
-        gphi.print("Gradient = ");
+        // gphi.print("Gradient = ");
         if(gphi.norm() < acc) break;
         matrix H = hessian(phi,xCopy, gphi);
         QRSolver qrsolver(H);
         vector dx = qrsolver.solve(-gphi);
         double lambda = 1.0;
 
-        while (lambda >= 1/1024) {
+        while (lambda >= 1.0/1024.0) {
             if(phi(xCopy + lambda * dx) < phi(xCopy)) break;
             lambda /= 2;
         }

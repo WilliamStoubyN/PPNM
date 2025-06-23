@@ -1,0 +1,5 @@
+Rosenbrock's valley function
+Implementation found a minimum at : (0.999991,0.999983) after 8609 iterations, expected minimum at : (1,1)
+
+Himmelblau's function
+Implementation found a minimum at : (3,2) after 8 iterations, expected minimum at : (1,1)

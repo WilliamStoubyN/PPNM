@@ -24,15 +24,16 @@ int main() {
     int iterations = std::get<1>(res);
 
     std::cout << "Rosenbrock's valley function\n";
-    std::cout << "Implementation found a minimum at : (" << xMinimum[0] << "," << xMinimum[1] << ") after " << iterations << " iterations, expected minimum at : (1,1)";
-    
+    std::cout << "Implementation found a minimum at : (" << xMinimum[0] << "," << xMinimum[1] << ") after " << iterations << " iterations, expected minimum at : (1.0,1.0)"; //From Wikipedia: It has a global minimum at (x,y) = (a,a^2)
 
+    //Himmelblau's function
+    res = newton(himmelblau, xInit, acc);
+    xMinimum = std::get<0>(res);
+    iterations = std::get<1>(res);
 
-
-
-
-
-
+    std::cout << "\n\n";
+    std::cout << "Himmelblau's function\n";
+    std::cout << "Implementation found a minimum at : (" << xMinimum[0] << "," << xMinimum[1] << ") after " << iterations << " iterations, expected minimum at : (3.0,2.0)"; //From Wikipedia: It has a local minimum at f(3.0, 2.0), which is identical to 3 other minima listed on Wikipedia
 
     return 0;
 }
