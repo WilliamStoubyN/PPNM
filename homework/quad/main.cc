@@ -20,9 +20,9 @@ std::function<double(double)> erfh2(double z) {
 };
 
 double erf(double z, double acc, double eps) {
-    if(z < 0 ) {return -erf(z);}
+    if(z < 0 ) {return -erf(-z);}
     if(0 <= z && z <= 1) {return 2/std::sqrt(M_PI) * integrate(erfh1, 0, z, acc, eps);}
-    return 1 - 2/std::sqrt(M_PI * integrate(erfh2(z), 0, 1, acc, eps));
+    return 1 - 2/std::sqrt(M_PI) * integrate(erfh2(z), 0, 1, acc, eps);
 };
 
 int main() {
@@ -70,6 +70,24 @@ int main() {
 
     //erf
     double erf1 =  0.84270079294971486934;
+    vector erfxs, erfys;
+    vector xsAcc, ysAcc;
+    
+    for(double i = -3.5; i < 3.5; i += 1/8.0) {
+        erfxs.push_back(i);
+        erfys.push_back(erf(i, 1e-3, 1e-3));
+    }
+
+    for(int i = 0; i < 24; ++i) {
+        xsAcc.push_back(std::pow(2, -i));
+        ysAcc.push_back(std::abs(erf1 - erf(1, xsAcc[i], 0)));
+    }
+    
+    std::cout << "\n\n";
+    for(int i = 0; i < erfxs.size; ++i) std::cout << erfxs[i] << ", " << erfys[i] << "\n";
+
+    std::cout << "\n\n";
+    for(int i = 0; i < xsAcc.size; ++i) std::cout << xsAcc[i] << ", " << ysAcc[i] << "\n";
 
     return 0;
 }

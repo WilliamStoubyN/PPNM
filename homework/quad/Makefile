@@ -15,13 +15,36 @@ OBJS := $(INCS:$(INCLUDE_DIR)/%.h=$(OBJECT_DIR)/%.o)
 OBJS := $(OBJS:.h=.o)
 
 .PHONY: all clean
-all: Out.txt
+all: Out.txt plot.erf.svg plot.loglogerf.svg
 
 Out.txt : main
 	./$< > $@
 
 main : main.o $(OBJS)
 	$(CXX) $(CXXFLAGS) $(LDLIBS) $(CPPFLAGS) -o $@ $^
+
+plot.erf.svg : Out.txt Makefile
+	echo 'set terminal svg background "white"; \
+		  set output "$@"; \
+		  set key bottom; \
+		  set xlabel "x"; \
+		  set ylabel "y"; \
+		  f(x) = erf(x) ; \
+		  plot \
+			f(x) title "erf(x)",\
+		  	"$<" index 1 with linespoints title "numerical solution"\
+	' | gnuplot
+
+plot.loglogerf.svg : Out.txt Makefile
+	echo 'set terminal svg background "white"; \
+		  set output "$@"; \
+		  set key bottom; \
+		  set xlabel "acc"; \
+		  set ylabel "|erf(1)_{CB} - erf(1)_{impl}|"; \
+		  set logscale xy; \
+		  plot \
+		  	"$<" index 2 with linespoints title "erf(1, acc, 0)"\
+	' | gnuplot
 
 #Create all object files from their corresponding .cc file. Also check if the object folder even exists
 $(OBJECT_DIR)/%.o : $(SOURCE_DIR)/%.cc | $(OBJECT_DIR)
