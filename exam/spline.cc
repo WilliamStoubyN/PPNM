@@ -24,7 +24,7 @@ void cubicSubSpline::buildSpline() {
     }
 }
 
-double cubicSubSpline::eval(double z) const {
+double cubicSubSpline::evaluate(double z) const {
     int i = binarySearch(x,z);
     double dx = z - x[i];
     return y[i] + b[i] * dx + c[i] * dx * dx + d[i] * dx * dx * dx; 

@@ -15,13 +15,27 @@ OBJS := $(INCS:$(INCLUDE_DIR)/%.h=$(OBJECT_DIR)/%.o)
 OBJS := $(OBJS:.h=.o)
 
 .PHONY: all clean
-all: Out.txt 
+all: Out.txt out.cubicSubSpline.txt
 
 Out.txt : main
-	./$< -n 0 > $@
+	./$< --task 0 > $@
 
 out.cubicSubSpline.txt : main
-	./$< -n 1 > $@
+	./$< --task 1 > $@
+
+plot.cubicSubSpline.svg : out.cubicSubSpline.txt Makefile
+	echo 'set terminal svg background "white"; \
+		  set output "$@"; \
+		  set key bottom; \
+		  set xlabel "x"; \
+		  set ylabel "y"; \
+		  f(x) = cos(x) ; \
+		  plot \
+			f(x) title "cos(x)",\
+		  	"$<" index 1 using 1:2 with points pointtype 7 title "Sample points",\
+		  	"$<" index 1 using 1:2 with lines title "Cubic sup-spline"\
+	' | gnuplot
+
 
 main : main.o $(OBJS)
 	$(CXX) $(CXXFLAGS) $(LDLIBS) $(CPPFLAGS) -o $@ $^

@@ -29,7 +29,7 @@ class cubicSubSpline {
     cubicSubSpline& operator=(cubicSubSpline&&) = default;
 
     void buildSpline();
-    double eval(double) const;
+    double evaluate(double) const;
 };
 
 #endif

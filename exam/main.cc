@@ -2,16 +2,9 @@
 #include"../homework/include/vector.h"
 #include<iostream>
 #include<cmath>
+#include<string>
 
-int main(int argc, char** argv) {
-    int n = 0;
-
-    for(int i = 0; i < argc; ++i) {
-        std::string arg = argv[i];
-
-        if(arg == "-n" && i + 1 < argc) n = std::stoi(argv[i + 1]);
-    }
-
+int printDebuggingData() {
     int N = 15;
     vector xs(N), ys(N), dydx(N);
 
@@ -21,10 +14,32 @@ int main(int argc, char** argv) {
         dydx[i] = std::cos(xs[i]); 
     }
 
-    std::cout << "Test";
+    cubicSubSpline cubicSpline(xs, ys, dydx);
+    
+    //Sampled points
+    std::cout << "#Sampled points\n";
+    for(int i = 0; i < xs.size; ++i) std::cout << xs[i] << " " << ys[i] << " " << dydx[i] << "\n";
+
+    //Spline points
+    std::cout << "\n\n";
+    std::cout << "#Spline points\n";
+    for(double i = 0; i <= N - 1; i += 1/8.0) std::cout << i << " " << cubicSpline.evaluate(i) << "\n";
+
+    return 0;
+};
+
+int main(int argc, char** argv) {
+    int task = 0;
+
+    for(int i = 0; i < argc; ++i) {
+        std::string arg = argv[i];
+
+        if(arg == "--task" && i + 1 < argc) task = std::stoi(argv[i + 1]);
+    }
 
 
-
+    if(task == 1) return printDebuggingData();
+    else return 0;
 
     return 0;
 }
