@@ -22,7 +22,6 @@ void cubicSubSpline::buildSpline() {
         c[i] = 1/dx[i] * (-y[i + 1] - 2 * dydx[i] - 3/dx[i] * (y[i] - y[i + 1]));
         d[i] = 2/dx[i]/dx[i]/dx[i] * (y[i] - y[i + 1] + dx[i]/2 * (dydx[i + 1] + dydx[i]));
     }
-    
 }
 
 double cubicSubSpline::eval(double z) const {

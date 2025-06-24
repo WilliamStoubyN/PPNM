@@ -1,14 +1,13 @@
 #ifndef HAVE_SPLINE_H
 #define HAVE_SPLINE_H
 
-#include"../include/vector.h"
+#include"../homework/include/vector.h"
 #include<exception>
 #include<cmath>
-#include<assert>
 
 int binarySearch(vector, double);
 
-class cubicSubSpline() {
+class cubicSubSpline {
     public:
         vector x,y,dydx,b,c,d;
         int n;
