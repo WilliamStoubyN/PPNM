@@ -29,11 +29,11 @@ plot.cubicSubSpline.svg : out.cubicSubSpline.txt Makefile
 		  set key bottom; \
 		  set xlabel "x"; \
 		  set ylabel "y"; \
-		  f(x) = cos(x) ; \
+		  f(x) = sin(x) ; \
 		  plot \
-			f(x) title "cos(x)",\
-		  	"$<" index 1 using 1:2 with points pointtype 7 title "Sample points",\
-		  	"$<" index 1 using 1:2 with lines title "Cubic sup-spline"\
+			f(x) title "sin(x)",\
+		  	"$<" index 0 using 1:2 with points pointtype 7 title "Sample points",\
+		  	"$<" index 1 using 1:2 with lines title "Cubic sub-spline"\
 	' | gnuplot
 
 

@@ -9,7 +9,7 @@ int printDebuggingData() {
     vector xs(N), ys(N), dydx(N);
 
     for(int i = 0; i < N; ++i) {
-        xs[i] = 15.0/N * i;
+        xs[i] = i;
         ys[i] = std::sin(xs[i]);
         dydx[i] = std::cos(xs[i]); 
     }
@@ -23,7 +23,7 @@ int printDebuggingData() {
     //Spline points
     std::cout << "\n\n";
     std::cout << "#Spline points\n";
-    for(double i = 0; i <= N - 1; i += 1/8.0) std::cout << i << " " << cubicSpline.evaluate(i) << "\n";
+    for(double i = 0; i <= xs[xs.size - 1]; i += 1/8.0) std::cout << i << " " << cubicSpline.evaluate(i) << "\n";
 
     return 0;
 };
