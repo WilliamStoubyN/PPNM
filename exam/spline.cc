@@ -15,7 +15,7 @@ int binarySearch(vector x, double z) {
 void cubicSubSpline::buildSpline() {
     vector dx(n - 1);
 
-    for(int i = 0; i < n -1; ++i) dx[i] = x[i + 1] - x[i];
+    for(int i = 0; i < n - 1; ++i) dx[i] = x[i + 1] - x[i];
 
     for(int i = 0; i < n - 1; ++i) {
         d[i] = 2/dx[i]/dx[i]/dx[i] * (y[i] - y[i + 1] + dx[i]/2 * (dydx[i + 1] + dydx[i]));
@@ -35,6 +35,12 @@ double cubicSubSpline::derivative(double z) const {
     return dydx[i] + 2 * c[i] * dx + 3 * d[i] * dx * dx;
 }
 
+double cubicSubSpline::doubleDerivative(double z) const {
+    int i = binarySearch(x,z);
+    double dx = z - x[i];
+    return  2 * c[i] + 6 * d[i] * dx;
+}
+
 double cubicSubSpline::integral(double z) const {
     double sum = 0.0;
     int iMax = binarySearch(x,z);
@@ -45,4 +51,17 @@ double cubicSubSpline::integral(double z) const {
     double dx = z - x[iMax];
     sum += y[iMax] * dx + 1/2 * dydx[iMax] * dx * dx + 1/3 * c[iMax] * dx * dx * dx + 1/4 * d[iMax] * dx * dx * dx * dx;
     return sum;
+}
+
+void quarticSubSpline::buildSpline() {
+    vector dx(n - 1);
+
+    for(int i = 0; i < n - 1; ++i) dx[i] = x[i + 1] - x[i];
+
+    //TODO
+    //Solve the system of 3 linear equations for the coefficients by hand and code them in here
+    //Idbecoolif QRSolver could do it for me, but it will take more time to code and I only need the quartic case
+    for(int i =  0; i < n - 1; ++i) {
+
+    }
 }

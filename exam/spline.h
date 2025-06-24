@@ -31,6 +31,34 @@ class cubicSubSpline {
     double evaluate(double) const;
     double derivative(double) const;
     double integral(double) const;
+    double doubleDerivative(double) const;
+};
+
+class quarticSubSpline {
+    public:
+        vector x,y,dydx,b,c,d,e;
+        int n;
+
+    quarticSubSpline(const vector& x, const vector& y, const vector& dydx) : x(x), y(y), dydx(dydx) {
+        n = x.size;
+        c = vector(n - 1);
+        d = vector(n - 1);
+        e = vector(n - 1);
+
+        buildSpline();
+    }
+
+    quarticSubSpline() = default;
+    quarticSubSpline(const quarticSubSpline&) = default;
+    quarticSubSpline(quarticSubSpline&&) = default;
+    ~quarticSubSpline() = default;
+    quarticSubSpline& operator=(const quarticSubSpline&) = default;
+    quarticSubSpline& operator=(quarticSubSpline&&) = default;
+
+    void buildSpline();
+    double evaluate(double) const;
+    double derivative(double) const;
+    double integral(double) const;
 };
 
 #endif

@@ -4,7 +4,7 @@
 #include<cmath>
 #include<string>
 
-int printDebugData() {
+int printCubicDebugData() {
     int N = 30;
     vector xs(N), ys(N), dydx(N);
 
@@ -35,6 +35,12 @@ int printDebugData() {
     std::cout << "#Spline integral points\n";
     for(double i = 0; i <= xs[xs.size - 1]; i += 1/8.0) std::cout << i << " " << cubicSubSpline.integral(i) << "\n";
 
+    //Cubic sub-spline double derivative
+    //This should not produce a nice plot, if anything
+    std::cout << "\n\n";
+    std::cout << "#Spline double derivative points\n";
+    for(double i = 0; i <= xs[xs.size - 1]; i += 1/8.0) std::cout << i << " " << cubicSubSpline.doubleDerivative(i) << "\n";
+
     return 0;
 };
 
@@ -50,7 +56,7 @@ int main(int argc, char** argv) {
     }
 
 
-    if(task == 1) return printDebugData();
+    if(task == 1) return printCubicDebugData();
     else return 0;
 
     return 0;

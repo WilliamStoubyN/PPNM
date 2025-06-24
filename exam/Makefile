@@ -36,7 +36,8 @@ plot.cubicSubSpline.svg : out.cubicSubSpline.txt Makefile
 			"$<" index 0 using 1:3 with points pointtype 1 title "Sample derivative",\
 		  	"$<" index 1 using 1:2 with lines title "Cubic sub-spline",\
 			"$<" index 2 using 1:2 with lines title "Spline derivative",\
-			"$<" index 3 using 1:2 with lines title "Spline integral"\
+			"$<" index 3 using 1:2 with lines title "Spline integral",\
+			"$<" index 4 using 1:2 with lines title "Spline double deriv"\
 	' | gnuplot
 
 
