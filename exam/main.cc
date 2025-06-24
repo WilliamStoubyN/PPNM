@@ -32,7 +32,7 @@ int printDebugData() {
 
     //Cubic sub-spline integral for plotting
     std::cout << "\n\n";
-    std::cout << "#Spline derivative points\n";
+    std::cout << "#Spline integral points\n";
     for(double i = 0; i <= xs[xs.size - 1]; i += 1/8.0) std::cout << i << " " << cubicSubSpline.integral(i) << "\n";
 
     return 0;

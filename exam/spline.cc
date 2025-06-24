@@ -36,7 +36,7 @@ double cubicSubSpline::derivative(double z) const {
 }
 
 double cubicSubSpline::integral(double z) const {
-    double sum = 0;
+    double sum = 0.0;
     int iMax = binarySearch(x,z);
     for(int i = 0; i < iMax; ++i) {
         double dx = x[i + 1] - x[i];
