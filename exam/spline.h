@@ -14,6 +14,7 @@ class cubicSubSpline {
 
     cubicSubSpline(const vector& x, const vector& y, const vector& dydx) : x(x), y(y), dydx(dydx) {
         n = x.size;
+        b = vector(n);
         c = vector(n - 1);
         d = vector(n - 1);
 

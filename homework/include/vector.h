@@ -57,6 +57,7 @@ vector project(const vector&, const vector&);       //Project vector a onto vect
 
 double dot(const vector&, const vector&);
 bool approx(const vector& a, const vector& b, double acc = 1e-6, double eps = 1e-6);
+vector linspace(double min, double max, int N);
 bool areVectorsCompatible(const vector&, const vector&);
 
 #endif

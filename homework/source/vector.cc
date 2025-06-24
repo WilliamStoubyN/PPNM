@@ -164,6 +164,13 @@ bool approx(const vector& a, const vector& b, double acc, double eps) {
     return true;
 }
 
+vector linspace(double min, double max, int N) {
+    double dx = (max - min)/(N - 1);
+    vector linspace(N);
+    for(int i = 0; i < N; ++i) linspace[i] = min + i * dx;
+    return linspace;
+}
+
 bool areVectorsCompatible(const vector& a, const vector& b) {
     if(a.size != b.size) throw std::invalid_argument("operand shapes do not match(" + std::to_string(a.size) + "," + std::to_string(b.size) + ")");
     return true;

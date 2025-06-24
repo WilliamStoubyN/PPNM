@@ -8,8 +8,10 @@ int printCubicDebugData() {
     int N = 30;
     vector xs(N), ys(N), dydx(N);
 
+    xs = linspace(-7.0, 7.0, N);
+
     for(int i = 0; i < N; ++i) {
-        xs[i] = 15.0/N * i;
+        // xs[i] = 15.0/N * i;
         ys[i] = std::sin(xs[i]);
         dydx[i] = std::cos(xs[i]); 
     }
@@ -23,23 +25,23 @@ int printCubicDebugData() {
     //Cubic sub-spline points for plotting
     std::cout << "\n\n";
     std::cout << "#Spline points\n";
-    for(double i = 0; i <= xs[xs.size - 1]; i += 1/8.0) std::cout << i << " " << cubicSubSpline.evaluate(i) << "\n";
+    for(double i = -7; i <= xs[xs.size - 1]; i += 1/8.0) std::cout << i << " " << cubicSubSpline.evaluate(i) << "\n";
 
     //Cubic sub-spline derivative for plotting
     std::cout << "\n\n";
     std::cout << "#Spline derivative points\n";
-    for(double i = 0; i <= xs[xs.size - 1]; i += 1/8.0) std::cout << i << " " << cubicSubSpline.derivative(i) << "\n";
+    for(double i = -7; i <= xs[xs.size - 1]; i += 1/8.0) std::cout << i << " " << cubicSubSpline.derivative(i) << "\n";
 
     //Cubic sub-spline integral for plotting
     std::cout << "\n\n";
     std::cout << "#Spline integral points\n";
-    for(double i = 0; i <= xs[xs.size - 1]; i += 1/8.0) std::cout << i << " " << cubicSubSpline.integral(i) << "\n";
+    for(double i = -7; i <= xs[xs.size - 1]; i += 1/8.0) std::cout << i << " " << cubicSubSpline.integral(i) << "\n";
 
     //Cubic sub-spline double derivative
-    //This should not produce a nice plot, if anything
-    std::cout << "\n\n";
-    std::cout << "#Spline double derivative points\n";
-    for(double i = 0; i <= xs[xs.size - 1]; i += 1/8.0) std::cout << i << " " << cubicSubSpline.doubleDerivative(i) << "\n";
+    //This should produce a discontinious function
+    // std::cout << "\n\n";
+    // std::cout << "#Spline double derivative points\n";
+    // for(double i = -7; i <= xs[xs.size - 1]; i += 1/8.0) std::cout << i << " " << cubicSubSpline.doubleDerivative(i) << "\n";
 
     return 0;
 };
