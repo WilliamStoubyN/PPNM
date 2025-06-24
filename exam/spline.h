@@ -4,17 +4,22 @@
 #include"../include/vector.h"
 #include<exception>
 #include<cmath>
+#include<assert>
 
 int binarySearch(vector, double);
 
 class cubicSubSpline() {
     public:
-        vector x,y,b,c,d;
+        vector x,y,dydx,b,c,d;
+        int n;
 
-    cubicSubSpline(const vector& x, const vector& y) : x(x), y(y) {
-        b = vector(x.size - 1);
-        c = vector(x.size - 1);
-        d = vector(x.size - 1);
+    cubicSubSpline(const vector& x, const vector& y, const vector& dydx) : x(x), y(y), dydx(dydx) {
+        n = x.size;
+        b = vector(n);
+        c = vector(n - 1);
+        d = vector(n - 1);
+
+        buildSpline();
     }
 
     cubicSubSpline() = default;
