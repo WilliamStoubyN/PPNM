@@ -4,29 +4,41 @@
 #include<cmath>
 #include<string>
 
-int printDebuggingData() {
-    int N = 15;
+int printDebugData() {
+    int N = 30;
     vector xs(N), ys(N), dydx(N);
 
     for(int i = 0; i < N; ++i) {
-        xs[i] = i;
+        xs[i] = 15.0/N * i;
         ys[i] = std::sin(xs[i]);
         dydx[i] = std::cos(xs[i]); 
     }
 
-    cubicSubSpline cubicSpline(xs, ys, dydx);
+    cubicSubSpline cubicSubSpline(xs, ys, dydx);
     
-    //Sampled points
+    //Sampled points for plotting
     std::cout << "#Sampled points\n";
     for(int i = 0; i < xs.size; ++i) std::cout << xs[i] << " " << ys[i] << " " << dydx[i] << "\n";
 
-    //Spline points
+    //Cubic sub-spline points for plotting
     std::cout << "\n\n";
     std::cout << "#Spline points\n";
-    for(double i = 0; i <= xs[xs.size - 1]; i += 1/8.0) std::cout << i << " " << cubicSpline.evaluate(i) << "\n";
+    for(double i = 0; i <= xs[xs.size - 1]; i += 1/8.0) std::cout << i << " " << cubicSubSpline.evaluate(i) << "\n";
+
+    //Cubic sub-spline derivative for plotting
+    std::cout << "\n\n";
+    std::cout << "#Spline derivative points\n";
+    for(double i = 0; i <= xs[xs.size - 1]; i += 1/8.0) std::cout << i << " " << cubicSubSpline.derivative(i) << "\n";
+
+    //Cubic sub-spline integral for plotting
+    std::cout << "\n\n";
+    std::cout << "#Spline derivative points\n";
+    for(double i = 0; i <= xs[xs.size - 1]; i += 1/8.0) std::cout << i << " " << cubicSubSpline.integral(i) << "\n";
 
     return 0;
 };
+
+
 
 int main(int argc, char** argv) {
     int task = 0;
@@ -38,7 +50,7 @@ int main(int argc, char** argv) {
     }
 
 
-    if(task == 1) return printDebuggingData();
+    if(task == 1) return printDebugData();
     else return 0;
 
     return 0;

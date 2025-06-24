@@ -26,12 +26,12 @@ double linterpInteg(vector x, vector y, double z) {
         double dx = x[i + 1] - x[i];
         double dy = y[i + 1] - y[i];
         double p = dy/dx;
-        integral += y[i] * dx + p * dx * dx * 0.5; //area of given data
+        integral += y[i] * dx + p * dx * dx * 0.5; 
     }
     double dx = z - x[iMax];
     double dy = linterp(x, y, z) - y[iMax];
     double p = dy/dx;
-    integral += y[iMax] * dx + p * dx * dx * 0.5; //area of interpolated data;
+    integral += y[iMax] * dx + p * dx * dx * 0.5;
     return integral;
 }
 

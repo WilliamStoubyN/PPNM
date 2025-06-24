@@ -29,6 +29,8 @@ class cubicSubSpline {
 
     void buildSpline();
     double evaluate(double) const;
+    double derivative(double) const;
+    double integral(double) const;
 };
 
 #endif

@@ -15,7 +15,7 @@ OBJS := $(INCS:$(INCLUDE_DIR)/%.h=$(OBJECT_DIR)/%.o)
 OBJS := $(OBJS:.h=.o)
 
 .PHONY: all clean
-all: Out.txt out.cubicSubSpline.txt
+all: Out.txt out.cubicSubSpline.txt plot.cubicSubSpline.svg
 
 Out.txt : main
 	./$< --task 0 > $@
@@ -33,7 +33,10 @@ plot.cubicSubSpline.svg : out.cubicSubSpline.txt Makefile
 		  plot \
 			f(x) title "sin(x)",\
 		  	"$<" index 0 using 1:2 with points pointtype 7 title "Sample points",\
-		  	"$<" index 1 using 1:2 with lines title "Cubic sub-spline"\
+			"$<" index 0 using 1:3 with points pointtype 1 title "Sample derivative",\
+		  	"$<" index 1 using 1:2 with lines title "Cubic sub-spline",\
+			"$<" index 2 using 1:2 with lines title "Spline derivative",\
+			"$<" index 3 using 1:2 with lines title "Spline integral"\
 	' | gnuplot
 
 
