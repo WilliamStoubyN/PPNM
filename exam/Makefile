@@ -29,17 +29,17 @@ data/out.quarticData.txt : main
 plots/plot.cubicSubSpline.svg : data/out.cubicData.txt Makefile
 	echo 'set terminal svg background "white"; \
 		  set output "$@"; \
-		  set key bottom; \
+		  set key top; \
 		  set xlabel "x"; \
 		  set ylabel "y"; \
-		  set title "Debugging"; \
-		  f(x) = cos(x); \
+		  set title "Cubic Sub-spline"; \
+		  f(x) = sin(x); \
 		  plot \
-			f(x) title "cos(x)",\
-		  	"$<" index 0 using 1:2 with points pointtype 7 title "Sample points",\
+			f(x) title "sin(x)",\
+		  	"$<" index 0 using 1:2 with points pointtype 7 title "Sample",\
 			"$<" index 0 using 1:3 with points pointtype 1 title "Sample derivative",\
 		  	"$<" index 1 using 1:2 with lines title "Cubic sub-spline",\
-			"$<" index 2 using 1:2 with lines title "Spline derivative",\
+			"$<" index 2 using 1:2 with lines title "Spline deriv",\
 			"$<" index 3 using 1:2 with lines title "Spline integral",\
 			"$<" index 4 using 1:2 with lines title "Spline double deriv"\
 	' | gnuplot
@@ -47,19 +47,18 @@ plots/plot.cubicSubSpline.svg : data/out.cubicData.txt Makefile
 plots/plot.quarticSubSpline.svg : data/out.quarticData.txt Makefile
 	echo 'set terminal svg background "white"; \
 		  set output "$@"; \
-		  set key bottom; \
+		  set key top; \
 		  set xlabel "x"; \
 		  set ylabel "y"; \
-		  set title "Debugging"; \
-		  f(x) = cos(x); \
+		  set title "Quartic Sub-spline"; \
+		  f(x) = sin(x); \
 		  plot \
-			f(x) title "cos(x)",\
-		  	"$<" index 0 using 1:2 with points pointtype 7 title "Sample points",\
+			f(x) title "sin(x)",\
+		  	"$<" index 0 using 1:2 with points pointtype 7 title "Sample",\
 			"$<" index 0 using 1:3 with points pointtype 1 title "Sample derivative",\
-		  	"$<" index 1 using 1:2 with lines title "Cubic sub-spline",\
-			"$<" index 2 using 1:2 with lines title "Spline derivative",\
-			"$<" index 3 using 1:2 with lines title "Spline integral",\
-			"$<" index 4 using 1:2 with lines title "Spline double deriv"\
+		  	"$<" index 1 using 1:2 with lines title "Quartic sub-spline",\
+			"$<" index 2 using 1:2 with lines title "Spline deriv",\
+			"$<" index 3 using 1:2 with lines title "Spline double deriv"\
 	' | gnuplot
 
 main : main.o $(OBJS)

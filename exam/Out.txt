@@ -1,0 +1,8 @@
+=============== Project 17 ===============
+Cubic sub-spline for data with derivatives
+URL: http://212.27.24.106:8080/prog/projex/spline-with-yprime.htm
+Backup URL: https://fedorov.sdfeu.org/prog/projex/spline-with-yprime.htm
+Exam Number: 211014
+Date: 27-06-2025
+
+=============== Output ===============

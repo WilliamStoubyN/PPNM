@@ -30,15 +30,17 @@ double cubicSubSpline::evaluate(double z) const {
 
 double cubicSubSpline::derivative(double z) const {
     int i = binarySearch(x,z);
-    double dx = z - x[i];
-    return yPrime[i] + 2 * c[i] * dx + 3 * d[i] * dx * dx;
+    // double dx = z - x[i];
+    // return yPrime[i] + 2 * c[i] * dx + 3 * d[i] * dx * dx;
+    return yPrime[i];
 }
 
-// double cubicSubSpline::doubleDerivative(double z) const {
-//     int i = binarySearch(x,z);
-//     double dx = z - x[i];
-//     return  2 * c[i] + 6 * d[i] * dx;
-// }
+double cubicSubSpline::doubleDerivative(double z) const {
+    int i = binarySearch(x,z);
+    double dx = z - x[i];
+    // return  2 * c[i] + 6 * d[i] * dx;
+    return (yPrime[i + 1] - yPrime[i])/dx; //finite difference approximation of derivative
+}
 
 double cubicSubSpline::integral(double z) const {
     double sum = 0.0;
@@ -60,19 +62,6 @@ void quarticSubSpline::buildSpline() {
         yPrimePrime[i] = (yPrime[i + 1] - yPrime[i])/dx[i];
     }
 
-    // for(int i = 0; i < n - 1; ++i) {
-    //     yPrimePrime[i] = (yPrime[i + 1] - yPrime[i])/dx[i];
-    // }
-
-    // yPrimePrime[0] = 0;
-    // yPrimePrime[1] = 0;
-    // yPrimePrime[n - 1] = 0;
-    // yPrimePrime[n - 2] = 0;
-
-    // for(int i = 0; i < n - 2; ++i) {
-    //     yPrimePrime[i] = (yPrime[i + 1] - yPrime[i])/dx[i];
-    // }
-
     for(int i =  0; i < n - 1; ++i) {
         d[i] = 2/dx[i]/dx[i]/dx[i] * (y[i] - y[i + 1] + dx[i]/2 * (yPrime[i + 1] + yPrime[i]));
         c[i] = ((yPrime[i + 1] - yPrime[i])/dx[i] - 3 * d[i] * dx[i])/2;
@@ -89,9 +78,10 @@ double quarticSubSpline::evaluate(double z) const {
 
 double quarticSubSpline::derivative(double z) const {
     int i = binarySearch(x,z);
-    double dx1 = z - x[i];
-    double dx2 = z - x[i];
-    return yPrime[i] + 2 * c[i] * dx1 + 3 * d[i] * dx1 * dx1 + 2 * e[i] * dx1 * dx2 * (x[i] + x[i + 1] - 2 * z);
+    // double dx1 = z - x[i];
+    // double dx2 = z - x[i];
+    // return yPrime[i] + 2 * c[i] * dx1 + 3 * d[i] * dx1 * dx1 + 2 * e[i] * dx1 * dx2 * (x[i] + x[i + 1] - 2 * z);
+    return yPrime[i];
 }
 
 double quarticSubSpline::doubleDerivative(double z) const {
