@@ -9,10 +9,10 @@ int binarySearch(vector, double);
 
 class cubicSubSpline {
     public:
-        vector x,y,dydx,c,d;
+        vector x,y,yPrime,c,d;
         int n;
 
-    cubicSubSpline(const vector& x, const vector& y, const vector& dydx) : x(x), y(y), dydx(dydx) {
+    cubicSubSpline(const vector& x, const vector& y, const vector& yPrime) : x(x), y(y), yPrime(yPrime) {
         n = x.size;
         c = vector(n - 1);
         d = vector(n - 1);
@@ -36,11 +36,12 @@ class cubicSubSpline {
 
 class quarticSubSpline {
     public:
-        vector x,y,dydx,c,d,e;
+        vector x,y,yPrime,yPrimePrime,c,d,e;
         int n;
 
-    quarticSubSpline(const vector& x, const vector& y, const vector& dydx) : x(x), y(y), dydx(dydx) {
+    quarticSubSpline(const vector& x, const vector& y, const vector& yPrime) : x(x), y(y), yPrime(yPrime) {
         n = x.size;
+        yPrimePrime = vector(n);
         c = vector(n - 1);
         d = vector(n - 1);
         e = vector(n - 1);
@@ -58,7 +59,8 @@ class quarticSubSpline {
     void buildSpline();
     double evaluate(double) const;
     double derivative(double) const;
-    double integral(double) const;
+    // double integral(double) const;
+    double doubleDerivative(double) const;
 };
 
 #endif

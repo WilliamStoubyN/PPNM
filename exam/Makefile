@@ -15,15 +15,18 @@ OBJS := $(INCS:$(INCLUDE_DIR)/%.h=$(OBJECT_DIR)/%.o)
 OBJS := $(OBJS:.h=.o)
 
 .PHONY: all clean
-all: Out.txt out.cubicSubSpline.txt plot.cubicSubSpline.svg
+all: Out.txt data/out.cubicData.txt plots/plot.cubicSubSpline.svg data/out.quarticData.txt plots/plot.quarticSubSpline.svg
 
 Out.txt : main
 	./$< --task 0 > $@
 
-out.cubicSubSpline.txt : main
+data/out.cubicData.txt : main
 	./$< --task 1 > $@
 
-plot.cubicSubSpline.svg : out.cubicSubSpline.txt Makefile
+data/out.quarticData.txt : main
+	./$< --task 2 > $@
+
+plots/plot.cubicSubSpline.svg : data/out.cubicData.txt Makefile
 	echo 'set terminal svg background "white"; \
 		  set output "$@"; \
 		  set key bottom; \
@@ -41,6 +44,23 @@ plot.cubicSubSpline.svg : out.cubicSubSpline.txt Makefile
 			"$<" index 4 using 1:2 with lines title "Spline double deriv"\
 	' | gnuplot
 
+plots/plot.quarticSubSpline.svg : data/out.quarticData.txt Makefile
+	echo 'set terminal svg background "white"; \
+		  set output "$@"; \
+		  set key bottom; \
+		  set xlabel "x"; \
+		  set ylabel "y"; \
+		  set title "Debugging"; \
+		  f(x) = cos(x); \
+		  plot \
+			f(x) title "cos(x)",\
+		  	"$<" index 0 using 1:2 with points pointtype 7 title "Sample points",\
+			"$<" index 0 using 1:3 with points pointtype 1 title "Sample derivative",\
+		  	"$<" index 1 using 1:2 with lines title "Cubic sub-spline",\
+			"$<" index 2 using 1:2 with lines title "Spline derivative",\
+			"$<" index 3 using 1:2 with lines title "Spline integral",\
+			"$<" index 4 using 1:2 with lines title "Spline double deriv"\
+	' | gnuplot
 
 main : main.o $(OBJS)
 	$(CXX) $(CXXFLAGS) $(LDLIBS) $(CPPFLAGS) -o $@ $^
