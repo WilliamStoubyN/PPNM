@@ -209,7 +209,7 @@
 6.25 0.997987
 
 
-#Spline double derivative points
+#Spline second derivative points
 0 -0.0316119
 0.125 -0.150496
 0.25 -0.267459

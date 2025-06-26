@@ -264,7 +264,7 @@
 #Spline integral value = 5.08274e-16
 
 
-#Spline double derivative points
+#Spline second derivative points
 0 -inf
 0.125 -0.0980257
 0.25 -0.234562

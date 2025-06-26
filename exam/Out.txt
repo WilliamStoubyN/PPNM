@@ -6,3 +6,31 @@ Exam Number: 211014
 Date: 27-06-2025
 
 =============== Output ===============
+--- Extra Task 1 ---
+Testing that the cubic sub-spline integrate routine works as intended
+using sin(x), x^3 and exp(x) from 0 to 2pi with N = 5000 sample points
+and that the first derivative of the sub-spline is equal to a given tabulated point:
+ - integral of spline using sin(x) from 0 to 2pi = 1.09869e-16, expected = 0
+ - b[0] = yPrime[0] ? : 1
+ - b[N/2] = yPrime[N/2] ? : 1
+ - b[N-2] = yPrime[N-2] ? : 1
+
+ - integral of spline using x^3 from 0 to 2pi = 389.48, expected ≈ 389.64
+ - b[0] = yPrime[0] ? : 1
+ - b[N/2] = yPrime[N/2] ? : 1
+ - b[N-2] = yPrime[N-2] ? : 1
+
+ - integral of spline using e^x from 0 to 2pi = 534.156, expected ≈ 534.49
+ - b[0] = yPrime[0] ? : 1
+ - b[N/2] = yPrime[N/2] ? : 1
+ - b[N-2] = yPrime[N-2] ? : 1
+
+--- Extra Task 2 ---
+The cubic sub-spline of sin(x) from 0 to 2pi can be seen together with its derivative,
+integral and second derivative in 'plot/plot.cubicSubSpline.svg', alongside the
+sampled points themselves. One can clearly see a discontinuity in the second
+derivative at around (x = 4).
+
+The quartic sub-spline of sin(x) from 0 to 2pi can be seen together with its derivative,
+and second derivative in 'plot/plot.quarticSubSpline.svg, alongside the sampled points.
+Here, there is no clear discontinuity.

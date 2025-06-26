@@ -31,7 +31,7 @@ class cubicSubSpline {
     double evaluate(double) const;
     double derivative(double) const;
     double integral(double) const;
-    double doubleDerivative(double) const;
+    double secondDerivative(double) const;
 };
 
 class quarticSubSpline {
@@ -60,7 +60,7 @@ class quarticSubSpline {
     double evaluate(double) const;
     double derivative(double) const;
     // double integral(double) const;
-    double doubleDerivative(double) const;
+    double secondDerivative(double) const;
 };
 
 #endif

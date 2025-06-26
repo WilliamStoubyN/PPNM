@@ -30,16 +30,13 @@ double cubicSubSpline::evaluate(double z) const {
 
 double cubicSubSpline::derivative(double z) const {
     int i = binarySearch(x,z);
-    // double dx = z - x[i];
-    // return yPrime[i] + 2 * c[i] * dx + 3 * d[i] * dx * dx;
     return yPrime[i];
 }
 
-double cubicSubSpline::doubleDerivative(double z) const {
+double cubicSubSpline::secondDerivative(double z) const {
     int i = binarySearch(x,z);
     double dx = z - x[i];
-    // return  2 * c[i] + 6 * d[i] * dx;
-    return (yPrime[i + 1] - yPrime[i])/dx; //finite difference approximation of derivative
+    return (yPrime[i + 1] - yPrime[i])/dx; //finite difference approximation of S''
 }
 
 double cubicSubSpline::integral(double z) const {
@@ -78,15 +75,11 @@ double quarticSubSpline::evaluate(double z) const {
 
 double quarticSubSpline::derivative(double z) const {
     int i = binarySearch(x,z);
-    // double dx1 = z - x[i];
-    // double dx2 = z - x[i];
-    // return yPrime[i] + 2 * c[i] * dx1 + 3 * d[i] * dx1 * dx1 + 2 * e[i] * dx1 * dx2 * (x[i] + x[i + 1] - 2 * z);
     return yPrime[i];
 }
 
-double quarticSubSpline::doubleDerivative(double z) const {
+double quarticSubSpline::secondDerivative(double z) const {
     int i = binarySearch(x,z);
-    double dx1 = z - x[i];
-    // double dx2 = z - x[i + 1];
-    return 2 * c[i] + 6 * d[i] * dx1 + 2 * e[i] * (x[i] * x[i] + 4 * x[i] * x[i + 1] - 6 * x[i] * z + x[i + 1] * x[i + 1] - 6 * x[i + 1] * z + 6 * z * z);
+    double dx = z - x[i];
+    return 2 * c[i] + 6 * d[i] * dx + 2 * e[i] * (x[i] * x[i] + 4 * x[i] * x[i + 1] - 6 * x[i] * z + x[i + 1] * x[i + 1] - 6 * x[i + 1] * z + 6 * z * z);
 }

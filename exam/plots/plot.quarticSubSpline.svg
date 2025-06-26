@@ -273,10 +273,10 @@
 	<use xlink:href='#gpPt6' transform='translate(536.76,90.01) scale(4.50)' color='rgb(  0, 158, 115)'/>
 </g>
 	</g>
-	<g id="gnuplot_plot_3" ><title>Sample derivative</title>
+	<g id="gnuplot_plot_3" ><title>Sample deriv</title>
 <g fill="none" color="black" stroke="currentColor" stroke-width="1.00" stroke-linecap="butt" stroke-linejoin="miter">
 	<g transform="translate(507.09,111.91)" stroke="none" fill="black" font-family="Arial" font-size="12.00"  text-anchor="end">
-		<text><tspan font-family="Arial" >Sample derivative</tspan></text>
+		<text><tspan font-family="Arial" >Sample deriv</tspan></text>
 	</g>
 </g>
 <g fill="none" color="black" stroke="currentColor" stroke-width="1.00" stroke-linecap="butt" stroke-linejoin="miter">
@@ -413,10 +413,10 @@
 		L413.37,241.13 L422.34,217.79 L431.31,194.78 L440.28,172.47 L449.25,151.22 L458.22,131.36 L467.19,113.23 L476.16,97.10
 		L485.13,83.25 L494.09,71.89 L503.06,63.21 L512.03,57.34 L521.00,54.38  '/></g>
 	</g>
-	<g id="gnuplot_plot_6" ><title>Spline double deriv</title>
+	<g id="gnuplot_plot_6" ><title>Spline 2nd deriv</title>
 <g fill="none" color="black" stroke="currentColor" stroke-width="1.00" stroke-linecap="butt" stroke-linejoin="miter">
 	<g transform="translate(507.09,165.91)" stroke="none" fill="black" font-family="Arial" font-size="12.00"  text-anchor="end">
-		<text><tspan font-family="Arial" >Spline double deriv</tspan></text>
+		<text><tspan font-family="Arial" >Spline 2nd deriv</tspan></text>
 	</g>
 </g>
 <g fill="none" color="black" stroke="currentColor" stroke-width="1.00" stroke-linecap="butt" stroke-linejoin="miter">
