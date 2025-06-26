@@ -20,7 +20,7 @@ int main() {
         ys[i] = fCosExp(xs[i]);
     }
 
-    int hiddenNeurons = 5;
+    int hiddenNeurons = 10;
     std::cout << "Training network on " << hiddenNeurons << " hidden neurons over the interval -1 to 1 with "
               << n << " datapoints. Approximating function f(x) = cos(5*x-1)*exp(-x^2)\n";
 

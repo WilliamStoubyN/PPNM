@@ -210,12 +210,12 @@
 	</g>
 </g>
 <g fill="none" color="black" stroke="currentColor" stroke-width="1.00" stroke-linecap="butt" stroke-linejoin="miter">
-	<path stroke='rgb( 86, 180, 233)'  d='M515.48,108.01 L558.04,108.01 M72.53,196.31 L83.95,169.81 L95.36,161.95 L106.78,169.24 L118.19,188.15 L129.61,215.22
-		L141.02,247.13 L152.44,280.80 L163.86,313.45 L175.27,342.69 L186.69,366.53 L198.10,383.45 L209.52,392.44 L220.93,392.97
-		L232.35,385.03 L243.77,369.05 L255.18,345.92 L266.60,316.89 L278.01,283.50 L289.43,247.51 L300.84,210.82 L312.26,175.34
-		L323.68,142.91 L335.09,115.21 L346.51,93.65 L357.92,79.32 L369.34,72.91 L380.75,74.68 L392.17,84.45 L403.58,101.58
-		L415.00,125.03 L426.42,153.40 L437.83,185.00 L449.25,217.96 L460.66,250.32 L472.08,280.17 L483.49,305.72 L494.91,325.49
-		L506.33,338.36 L517.74,343.68 L529.16,341.34 L540.57,331.81 L551.99,316.12 L563.40,295.92 L574.82,273.34  '/></g>
+	<path stroke='rgb( 86, 180, 233)'  d='M515.48,108.01 L558.04,108.01 M72.53,173.00 L83.95,174.73 L95.36,179.11 L106.78,187.91 L118.19,201.99 L129.61,221.38
+		L141.02,245.34 L152.44,272.54 L163.86,301.15 L175.27,329.10 L186.69,354.23 L198.10,374.49 L209.52,388.12 L220.93,393.76
+		L232.35,390.63 L243.77,378.50 L255.18,357.79 L266.60,329.53 L278.01,295.23 L289.43,256.89 L300.84,216.74 L312.26,177.19
+		L323.68,140.62 L335.09,109.22 L346.51,84.85 L357.92,68.92 L369.34,62.30 L380.75,65.24 L392.17,77.38 L403.58,97.76
+		L415.00,124.90 L426.42,156.90 L437.83,191.55 L449.25,226.52 L460.66,259.51 L472.08,288.42 L483.49,311.53 L494.91,327.60
+		L506.33,336.04 L517.74,337.01 L529.16,331.38 L540.57,320.85 L551.99,307.84 L563.40,295.43 L574.82,287.28  '/></g>
 	</g>
 <g fill="none" color="#FFFFFF" stroke="rgb( 86, 180, 233)" stroke-width="2.00" stroke-linecap="butt" stroke-linejoin="miter">
 </g>
@@ -237,7 +237,7 @@
 </g>
 <g fill="none" color="black" stroke="currentColor" stroke-width="1.00" stroke-linecap="butt" stroke-linejoin="miter">
 	<g transform="translate(323.67,30.91)" stroke="none" fill="black" font-family="Arial" font-size="12.00"  text-anchor="middle">
-		<text><tspan font-family="Arial" >ANN f(x) approximation</tspan></text>
+		<text><tspan font-family="Arial" >ANN f(x) approximation with 10 hidden neurons</tspan></text>
 	</g>
 </g>
 <g fill="none" color="black" stroke="currentColor" stroke-width="1.00" stroke-linecap="butt" stroke-linejoin="miter">

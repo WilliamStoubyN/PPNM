@@ -29,7 +29,7 @@ plot.ann.svg : Out.txt Makefile
 		  set key top; \
 		  set xlabel "x"; \
 		  set ylabel "y"; \
-		  set title "ANN f(x) approximation"; \
+		  set title "ANN f(x) approximation with 10 hidden neurons"; \
 		  f(x) = cos(5*x-1)*exp(-x*x); \
 		  plot \
 			f(x) title "cos(5x-1)*exp(-x^2)",\
