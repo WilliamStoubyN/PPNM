@@ -78,7 +78,7 @@ void plotCubic() {
     double xFinal = 2*M_PI;
     xs = linspace(xInitial, xFinal, N);
 
-    for(int i = 0; i < N; ++i) {        //a more elegent method of producing the dataset certainly exists, but this works
+    for(int i = 0; i < N; ++i) {
         ys[i] = std::sin(xs[i]);
         yPrime[i] = std::cos(xs[i]); 
     }
