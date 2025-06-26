@@ -10,5 +10,5 @@ The spline classes each take three vectors x, y, yPrime representing the tabulat
 
 The quartic sub-spline classes has an additional vector e variable compared to the cubic, which is used for the e[i] coefficient. To determine e[i], I used the continuity condition given by Equation 1.3 in the book, specifically setting
 
-https://latex.codecogs.com/svg.image?&space;S_i''(x_{i&plus;1})=y_{i&plus;1}''
+<img src="https://latex.codecogs.com/svg.image?&space;S_i''(x_{i&plus;1})=y_{i&plus;1}''" title=" S_i''(x_{i+1})=y_{i+1}''" />
 
