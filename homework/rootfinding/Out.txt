@@ -1,0 +1,28 @@
+--- Task A ---
+Test functions
+Accuracy = 1e-05
+f(x) = 4x-5
+Initial guess = ( 10 )
+Expected root = -1.25
+Found root = ( -1.25 )
+
+f(x) = x^2 + y^2
+Initial guess = (0.5,0.5)
+Expected root = (0,0)
+Found root = (0.00195313,0.00195313)
+
+Rosenbrock's Valley Function
+Initial guess = (2.5,2.5)
+Expected min = (1,1)
+Found root of gradient = (1,1)
+
+Himmelblau's function
+Initial guess = (4,4) and (-4,4) and (4,-4) and (-4,-4)
+Expected min = (3, 2)
+Expected min = (-2.80512, 3.13131)
+Expected min = (3.58443, -1.84813)
+Expected min = (-3.77931, -3.28329)
+Found root = ( 3 2 )
+Found root = ( -2.80512 3.13131 )
+Found root = ( 3.58443 -1.84813 )
+Found root = ( -3.77931 -3.28319 )
