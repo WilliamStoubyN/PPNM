@@ -12,3 +12,6 @@ The quartic sub-spline classes has an additional vector e variable compared to t
 
 <img src="https://latex.codecogs.com/svg.image?\bg{white}&space;S_i''(x_{i&plus;1})=y_{i&plus;1}''" title=" S_i''(x_{i+1})=y_{i+1}''" />
 
+Alt:
+
+https://latex.codecogs.com/svg.image?%5Cbg%7Bwhite%7D%20S_i''(x_%7Bi&plus;1%7D)=y_%7Bi&plus;1%7D''
