@@ -43,12 +43,13 @@ int main() {
     result = plainmc(fUnitCircle, a, b, N);
     analytic = M_PI;
 
-    std::cout << "Task A\n";
+    std::cout << "--- Task A ---\n";
     std::cout << "Unit Circle\n";
     std::cout << resultToString(result, analytic, N);
 
-    std::cout << "#Data to plot estimated- and actual error as functions of N\n";
+    
     std::cout << "\n\n";
+    std::cout << "#Data to plot estimated- and actual error as functions of N\n";
 
     //I know it's ugly but it works
     vector Ns, estErrors, actErrors;
@@ -78,7 +79,28 @@ int main() {
     analytic = 1.3932039296856768591842462603255;
 
     std::cout << "\nCosines example\n";
+    std::cout << resultToString(result, analytic, N) << "\n\n";
+
+    std:: cout << "--- Task B ---\n";
+    a = vector({-1, -1});
+    b = vector({1, 1});
+    N = 100000;
+    result = quasimc(fUnitCircle, a, b, N);
+    analytic = M_PI;
     std::cout << resultToString(result, analytic, N);
+
+
+    std::cout << "\n\n";
+    std::cout << "#Quasimc errors\n";
+    vector Ns2, estErrors2, actErrors2;
+    for(int i = 0; i < 18; ++i) {
+        Ns2.push_back(1000 * std::pow(1.3, i));
+        result = quasimc(fUnitCircle, a, b, (int)Ns2[i]);
+        estErrors2.push_back(result[1]);
+        actErrors2.push_back(std::abs(result[0] - analytic));
+        std::cout << Ns2[i] << ", " << estErrors2[i] << ", " << actErrors2[i] << "\n";
+    }
+    
 
     return 0;
 }

@@ -15,7 +15,7 @@ OBJS := $(INCS:$(INCLUDE_DIR)/%.h=$(OBJECT_DIR)/%.o)
 OBJS := $(OBJS:.h=.o)
 
 .PHONY: all clean
-all: Out.txt plot.unitcircle.svg;
+all: Out.txt plot.error.svg plot.quasiError.svg
 
 Out.txt : main
 	./$< > $@
@@ -23,12 +23,13 @@ Out.txt : main
 main : main.o $(OBJS)
 	$(CXX) $(CXXFLAGS) $(LDLIBS) $(CPPFLAGS) -o $@ $^
 
-plot.unitcircle.svg : Out.txt Makefile
+plot.error.svg : Out.txt Makefile
 	echo 'set terminal svg background "white"; \
 		  set output "$@"; \
 		  set key right; \
 		  set xlabel "N"; \
 		  set ylabel "error"; \
+		  set logscale x 2; \
 		  f(x) = a/sqrt(x); \
 		  a = 1.0; \
 		  fit f(x) "$<" index 1 using 1:3 via a; \
@@ -36,6 +37,23 @@ plot.unitcircle.svg : Out.txt Makefile
 		  plot \
 		  	"$<" index 1 using 1:2 with points pointtype 3 title "estimated error",\
 			"$<" index 1 using 1:3 with points pointtype 1 title "actual error",\
+			f(x) title sprintf("a/sqrt(N) fit, a = %3.5f", a) \
+	' | gnuplot
+
+plot.quasiError.svg : Out.txt Makefile
+	echo 'set terminal svg background "white"; \
+		  set output "$@"; \
+		  set key right; \
+		  set xlabel "N"; \
+		  set ylabel "error"; \
+		  set logscale x 2; \
+		  f(x) = a/sqrt(x); \
+		  a = 0.01; \
+		  fit f(x) "$<" index 3 using 1:3 via a; \
+		  set title "Error estimate of area of unit circle using quasi-random sampling"; \
+		  plot \
+		  	"$<" index 3 using 1:2 with points pointtype 3 title "estimated error",\
+			"$<" index 3 using 1:3 with points pointtype 1 title "actual error",\
 			f(x) title sprintf("a/sqrt(N) fit, a = %3.5f", a) \
 	' | gnuplot
 
