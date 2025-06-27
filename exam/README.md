@@ -1,4 +1,4 @@
-This is my solution for project 1.
+This is my solution for project 17.
 
 The file "spline.cc" contains a class for the cubic sub-spline, 
 a class for the quartic sub-spline from the 2nd extra task and
