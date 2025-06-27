@@ -35,3 +35,40 @@ double linterpInteg(vector x, vector y, double z) {
     return integral;
 }
 
+void quadraticSpline::buildSpline() {
+    vector dx(c.size), p(c.size);
+    for(int i = 0; i < x.size - 1; ++i) {
+        dx[i] = x[i + 1] - x[i];
+        p[i] = (y[i + 1] - y[i])/dx[i];
+    }
+
+    for(int i = 0; i < x.size - 2; ++i) c[i + 1] = 1/dx[i + 1] * (p[i + 1] - p[i] - c[i] * dx[i]);      //forward recursion
+
+    for(int i = x.size - 3; i >= 0; --i) c[i] = 0.5 * (c[i] + 1/dx[i] * (p[i + 1] - p[i] - c[i + 1] * dx[i + 1]));      //backward recursion
+
+    for(int i = 0; i < c.size; ++i) b[i] = p[i] - c[i] * dx[i];
+}
+
+double quadraticSpline::evaluate(double z) const {
+    int i = binsearch(x,z);
+    double dx = z - x[i];
+    return y[i] + b[i] * dx + c[i] * dx * dx;
+}
+
+double quadraticSpline::derivative(double z) const {
+    int i = binsearch(x,z);
+    double dx = z - x[i];
+    return b[i] + 2 * c[i] * dx;
+}
+
+double quadraticSpline::integral(double z) const {
+    int iMax = binsearch(x,z);
+    double integral = 0;
+    for(int i = 0; i < iMax; ++i) {
+        double dx = x[i + 1] - x[i];
+        integral += y[i] * dx + (1/2 * b[i] + 1/3 * c[i] * dx) * dx * dx;
+    }
+    double dx = z - x[iMax];
+    integral += y[iMax] * dx + (1/2 * b[iMax] + 1/3 * c[iMax] * dx) * dx * dx;
+    return integral;
+}

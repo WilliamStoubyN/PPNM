@@ -163,10 +163,10 @@
 		L477.70,160.96 L482.41,136.16 L487.12,112.81 L491.83,91.30 L496.54,72.01 L501.25,55.28 L505.96,41.38 L510.67,30.56
 		L515.39,23.01 L520.10,18.86 L524.81,18.17 L529.52,20.96 L534.23,27.18 L538.94,36.72  '/></g>
 	</g>
-	<g id="gnuplot_plot_2" ><title>sample points</title>
+	<g id="gnuplot_plot_2" ><title>Sample points</title>
 <g fill="none" color="black" stroke="currentColor" stroke-width="1.00" stroke-linecap="butt" stroke-linejoin="miter">
 	<g transform="translate(507.09,372.30)" stroke="none" fill="black" font-family="Arial" font-size="12.00"  text-anchor="end">
-		<text><tspan font-family="Arial" >sample points</tspan></text>
+		<text><tspan font-family="Arial" >Sample points</tspan></text>
 	</g>
 </g>
 <g fill="none" color="black" stroke="currentColor" stroke-width="1.00" stroke-linecap="butt" stroke-linejoin="miter">
@@ -187,10 +187,10 @@
 	<use xlink:href='#gpPt1' transform='translate(536.76,368.40) scale(4.50)' color='rgb(  0, 158, 115)'/>
 </g>
 	</g>
-	<g id="gnuplot_plot_3" ><title>linear spline</title>
+	<g id="gnuplot_plot_3" ><title>Linear spline</title>
 <g fill="none" color="black" stroke="currentColor" stroke-width="1.00" stroke-linecap="butt" stroke-linejoin="miter">
 	<g transform="translate(507.09,390.30)" stroke="none" fill="black" font-family="Arial" font-size="12.00"  text-anchor="end">
-		<text><tspan font-family="Arial" >linear spline</tspan></text>
+		<text><tspan font-family="Arial" >Linear spline</tspan></text>
 	</g>
 </g>
 <g fill="none" color="black" stroke="currentColor" stroke-width="1.00" stroke-linecap="butt" stroke-linejoin="miter">

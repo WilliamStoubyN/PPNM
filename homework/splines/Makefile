@@ -15,7 +15,7 @@ OBJS := $(INCS:$(INCLUDE_DIR)/%.h=$(OBJECT_DIR)/%.o)
 OBJS := $(OBJS:.h=.o)
 
 .PHONY: all clean
-all: Out.txt plot.linspline.svg
+all: Out.txt plot.linspline.svg plot.qspline.svg
 
 Out.txt : main
 	./$< > $@
@@ -32,9 +32,24 @@ plot.linspline.svg : Out.txt Makefile
 		  f(x) = cos(x) ; \
 		  plot \
 			f(x) title "cos(x)",\
-		  	"$<" index 1 with points title "sample points",\
-		  	"$<" index 2 with lines title "linear spline",\
+		  	"$<" index 1 with points title "Sample points",\
+		  	"$<" index 2 with lines title "Linear spline",\
 		  	"$<" index 3 with lines title "Integral"\
+	' | gnuplot
+
+plot.qspline.svg : Out.txt Makefile
+	echo 'set terminal svg background "white"; \
+		  set output "$@"; \
+		  set key top; \
+		  set xlabel "x"; \
+		  set ylabel "y"; \
+		  f(x) = sin(x) ; \
+		  plot \
+			f(x) title "sin(x)",\
+		  	"$<" index 4 with points title "Sample points",\
+			"$<" index 5 with lines title "Quadratic spline", \
+		  	"$<" index 6 with lines title "Spline derivative",\
+		  	"$<" index 7 with lines title "Spline integral"\
 	' | gnuplot
 
 #Create all object files from their corresponding .cc file. Also check if the object folder even exists
