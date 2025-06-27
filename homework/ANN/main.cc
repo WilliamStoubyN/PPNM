@@ -20,7 +20,7 @@ int main() {
         ys[i] = fCosExp(xs[i]);
     }
 
-    int hiddenNeurons = 10;
+    int hiddenNeurons = 8;
     std::cout << "Training network on " << hiddenNeurons << " hidden neurons over the interval -1 to 1 with "
               << n << " datapoints. Approximating function f(x) = cos(5*x-1)*exp(-x^2)\n";
 
@@ -38,6 +38,29 @@ int main() {
     for(int i = 0; i < n; ++i) {
         double x = xs[i];
         std::cout << x << " " << artificialNeuralNetwork.response(x) << "\n";
+    }
+
+    std::cout << "\n";
+    std::cout << "--- Task B --- \n";
+    std::cout << "\n\n";
+    std::cout << "#ANN first derivative\n";
+    for(int i = 0; i < n; ++i) {
+        double x = xs[i];
+        std::cout << x << " " << artificialNeuralNetwork.derivative(x) << "\n";
+    }
+
+    std::cout << "\n\n";
+    std::cout << "#ANN second derivative\n";
+    for(int i = 0; i < n; ++i) {
+        double x = xs[i];
+        std::cout << x << " " << artificialNeuralNetwork.secondDerivative(x) << "\n";
+    }
+
+    std::cout << "\n\n";
+    std::cout << "#ANN integral\n";
+    for(int i = 0; i < n; ++i) {
+        double x = xs[i];
+        std::cout << x << " " << artificialNeuralNetwork.integral(x) << "\n";
     }
 
     return 0;

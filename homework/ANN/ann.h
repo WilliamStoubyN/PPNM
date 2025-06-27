@@ -18,7 +18,7 @@ class ann {
         vector a,b,w;                   //network parameters
         std::string activation;         //determines which activation function to use
 
-        std::function<double(double)> fActivation;
+        std::function<double(double)> fActivation, fActivationPrime, fActivationPrimePrime, fActivationIntegral;
 
         ann(int n, std::string activation) : n(n), a(n), b(n), w(n), activation(activation) {
             double start = -1.0, end = 1.0;
@@ -28,10 +28,11 @@ class ann {
                 w[i] = 2;
             };
 
-
             if(activation == "gaussian wavelet") {
                 fActivation = [](double x) {return x * std::exp(-x * x);};
-                // dfActivation = [double x] {return (1 - 2 * x * x) * std::exp(-x * x);};
+                fActivationPrime = [](double x) {return (1 - 2 * x * x) * std::exp(-x * x);};
+                fActivationPrimePrime = [](double x) {return 2 * x * (2 * x * x - 3) * std::exp(-x * x);};
+                fActivationIntegral = [](double x) {return -1.0/2.0 * std::exp(-x * x);};
             } else if(activation == "gaussian") {
                 fActivation = [](double x) {return std::exp(-x * x);};
                 // dfActivation = [double x] {return -2 * x *  std::exp(-x * x);};
@@ -49,6 +50,9 @@ class ann {
         ann& operator=(ann&&) = default;            //move assignment
 
         double response(double x) const;
+        double derivative(double x) const;
+        double secondDerivative(double x) const;
+        double integral(double x) const;
         void train(const vector& x, const vector& y);
 };
 
